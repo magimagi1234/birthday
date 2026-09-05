@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import base64
-import os
+from pathlib import Path
 
 st.set_page_config(
     page_title="A Surprise for Ricky ❤️",
@@ -12,11 +12,17 @@ st.set_page_config(
 # -----------------------------
 # LOAD FILES FROM assets FOLDER
 # -----------------------------
+BASE_DIR = Path(__file__).resolve().parent
+ASSETS_DIR = BASE_DIR / "assets"
+
+
 def get_file_data(filename):
-    path = os.path.join("assets", filename)
-    if not os.path.isfile(path):
+    path = ASSETS_DIR / filename
+
+    if not path.is_file():
         return ""
-    with open(path, "rb") as f:
+
+    with path.open("rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
@@ -25,15 +31,17 @@ photo2 = get_file_data("photo2.jpeg")
 photo3 = get_file_data("photo3.jpeg")
 song = get_file_data("song.mp3")
 
+
 if not photo1 or not photo2 or not photo3:
     st.warning(
         "One or more photos are missing. Put photo1.jpeg, photo2.jpeg and "
         "photo3.jpeg inside the assets folder."
     )
 
-# IMPORTANT:
-# This is a normal triple-quoted string, NOT an f-string.
-# Therefore JavaScript/CSS { } do not cause Python f-string errors.
+
+# -----------------------------
+# HTML WEBSITE
+# -----------------------------
 html_code = """
 <!DOCTYPE html>
 <html>
@@ -377,7 +385,9 @@ button:active {
         <div class="eyebrow">it's your special day 🎂</div>
         <div class="cake">🎂</div>
         <div class="title">HAPPY BIRTHDAY<br>RICKY ❤️</div>
-        <div class="subtitle">Wishing you happiness, success and lots of beautiful moments ✨</div>
+        <div class="subtitle">
+            Wishing you happiness, success and lots of beautiful moments ✨
+        </div>
         <button id="next2">Continue 💗</button>
     </div>
 </div>
@@ -472,8 +482,12 @@ button:active {
     <div class="content">
         <div class="final-heart">❤️</div>
         <div class="final-title">HAPPY BIRTHDAY RICKY! 🎉</div>
-        <div class="final-text">Hope your day is as special as you are 💗✨</div>
-        <div style="font-size:60px;margin-top:25px;">🎂 🎈 🎁 💕</div>
+        <div class="final-text">
+            Hope your day is as special as you are 💗✨
+        </div>
+        <div style="font-size:60px;margin-top:25px;">
+            🎂 🎈 🎁 💕
+        </div>
     </div>
 </div>
 
@@ -482,6 +496,7 @@ button:active {
 </audio>
 
 <script>
+
 function showPage(number) {
     document.querySelectorAll(".page").forEach(function(page) {
         page.classList.remove("active");
@@ -521,26 +536,41 @@ document.getElementById("finalButton").addEventListener("click", function() {
 });
 
 function createConfetti() {
-    var emojis = ["❤️", "💗", "💕", "🎉", "✨", "🎈", "🎁", "🌸"];
+
+    var emojis = [
+        "❤️", "💗", "💕", "🎉",
+        "✨", "🎈", "🎁", "🌸"
+    ];
 
     for (var i = 0; i < 90; i++) {
+
         var item = document.createElement("div");
 
-        item.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        item.innerHTML =
+            emojis[Math.floor(Math.random() * emojis.length)];
+
         item.style.position = "fixed";
         item.style.left = Math.random() * 100 + "%";
         item.style.top = "-40px";
-        item.style.fontSize = (15 + Math.random() * 25) + "px";
+        item.style.fontSize =
+            (15 + Math.random() * 25) + "px";
         item.style.zIndex = "99999";
 
         document.body.appendChild(item);
 
-        var duration = 2200 + Math.random() * 2800;
+        var duration =
+            2200 + Math.random() * 2800;
 
         item.animate(
             [
-                { transform: "translateY(0) rotate(0deg)" },
-                { transform: "translateY(100vh) rotate(720deg)" }
+                {
+                    transform:
+                        "translateY(0) rotate(0deg)"
+                },
+                {
+                    transform:
+                        "translateY(100vh) rotate(720deg)"
+                }
             ],
             {
                 duration: duration,
@@ -548,25 +578,43 @@ function createConfetti() {
             }
         );
 
-        setTimeout(function(el) {
-            return function() { el.remove(); };
-        }(item), duration);
+        setTimeout(
+            function(el) {
+                return function() {
+                    el.remove();
+                };
+            }(item),
+            duration
+        );
     }
 }
 
 function createStars() {
-    var pages = document.querySelectorAll(".page");
+
+    var pages =
+        document.querySelectorAll(".page");
 
     pages.forEach(function(page) {
+
         for (var i = 0; i < 22; i++) {
-            var star = document.createElement("div");
+
+            var star =
+                document.createElement("div");
 
             star.className = "star";
             star.innerHTML = "✦";
-            star.style.left = Math.random() * 100 + "%";
-            star.style.top = Math.random() * 100 + "%";
-            star.style.fontSize = (8 + Math.random() * 12) + "px";
-            star.style.animationDelay = Math.random() * 2 + "s";
+
+            star.style.left =
+                Math.random() * 100 + "%";
+
+            star.style.top =
+                Math.random() * 100 + "%";
+
+            star.style.fontSize =
+                (8 + Math.random() * 12) + "px";
+
+            star.style.animationDelay =
+                Math.random() * 2 + "s";
 
             page.appendChild(star);
         }
@@ -574,16 +622,19 @@ function createStars() {
 }
 
 createStars();
+
 </script>
 
 </body>
 </html>
 """
 
+
 # -----------------------------
-# PUT BASE64 DATA INTO HTML
+# PUT PHOTOS INTO HTML
 # -----------------------------
 def make_image_tag(data, alt):
+
     if data:
         return (
             '<img src="data:image/jpeg;base64,'
@@ -592,6 +643,7 @@ def make_image_tag(data, alt):
             + alt
             + '">'
         )
+
     return '<div class="missing">Photo not found 💔</div>'
 
 
@@ -610,7 +662,11 @@ html_code = html_code.replace(
     make_image_tag(photo3, "Memory 3")
 )
 
-html_code = html_code.replace("__SONG__", song)
+html_code = html_code.replace(
+    "__SONG__",
+    song
+)
+
 
 # -----------------------------
 # SHOW WEBSITE
