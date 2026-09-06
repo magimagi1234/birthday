@@ -3,20 +3,20 @@ import streamlit.components.v1 as components
 import base64
 from pathlib import Path
 
-
-# ---------------------------------------------------------
+# =========================================================
 # PAGE SETTINGS
-# ---------------------------------------------------------
+# =========================================================
+
 st.set_page_config(
     page_title="A Surprise for Ricky",
     page_icon="♥",
     layout="wide"
 )
 
+# =========================================================
+# ASSETS
+# =========================================================
 
-# ---------------------------------------------------------
-# LOAD ASSETS
-# ---------------------------------------------------------
 BASE_DIR = Path(__file__).parent
 ASSETS_DIR = BASE_DIR / "assets"
 
@@ -36,12 +36,14 @@ photo2 = image_to_base64("photo2.jpeg")
 photo3 = image_to_base64("photo3.jpeg")
 
 
-# ---------------------------------------------------------
+# =========================================================
 # HTML
-# ---------------------------------------------------------
+# =========================================================
+
 html = r"""
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,11 +52,16 @@ html = r"""
 
 <style>
 
+/* =========================================================
+   BASIC
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -64,76 +71,91 @@ html, body {
 
 body {
     font-family: "Patrick Hand", cursive;
-    background: #3d123d;
 }
 
 
-/* =====================================================
-   MAIN SCREEN
-===================================================== */
+/* =========================================================
+   MAIN BACKGROUND
+========================================================= */
 
 .app {
+    position: relative;
+
     width: 100%;
     height: 100vh;
     min-height: 700px;
-    position: relative;
+
     overflow: hidden;
 
     background:
-        radial-gradient(circle at 50% 40%,
-        rgba(172, 74, 151, 0.45),
-        transparent 45%),
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(178, 74, 155, 0.55),
+            transparent 42%
+        ),
         linear-gradient(
-        180deg,
-        #6d2865 0%,
-        #42153f 55%,
-        #2c0d2c 100%
+            180deg,
+            #6b2865 0%,
+            #46163f 55%,
+            #2c0d2b 100%
         );
 
     color: white;
 }
 
 
-/* =====================================================
-   SMALL STARS
-===================================================== */
+/* =========================================================
+   STARS
+========================================================= */
 
 .star {
     position: absolute;
+
     width: 4px;
     height: 4px;
+
+    background: white;
+
     border-radius: 50%;
-    background: rgba(255,255,255,0.85);
-    box-shadow: 0 0 7px rgba(255,255,255,0.6);
+
+    opacity: 0.8;
+
+    box-shadow:
+        0 0 7px white;
 }
 
-.s1 { top: 9%; left: 22%; }
-.s2 { top: 17%; left: 79%; }
-.s3 { top: 32%; left: 12%; }
+.s1 { top: 10%; left: 19%; }
+.s2 { top: 17%; left: 78%; }
+.s3 { top: 31%; left: 11%; }
 .s4 { top: 39%; right: 9%; }
-.s5 { top: 58%; left: 19%; }
-.s6 { top: 72%; right: 17%; }
-.s7 { top: 84%; left: 35%; }
-.s8 { top: 76%; right: 43%; }
+.s5 { top: 56%; left: 17%; }
+.s6 { top: 70%; right: 16%; }
+.s7 { top: 83%; left: 34%; }
+.s8 { top: 77%; right: 43%; }
 .s9 { top: 23%; left: 49%; }
+.s10 { top: 63%; right: 31%; }
 
 
-/* =====================================================
-   PAGE SYSTEM
-===================================================== */
+/* =========================================================
+   PAGES
+========================================================= */
 
 .page {
     position: absolute;
+
     inset: 0;
 
     display: none;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
-    padding: 25px;
-
     text-align: center;
+
+    padding: 25px;
 }
 
 .page.active {
@@ -141,61 +163,73 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    TEXT
-===================================================== */
+========================================================= */
 
 .small-title {
-    font-size: 22px;
+    font-size: 21px;
+
     letter-spacing: 1px;
-    margin-bottom: 25px;
+
     color: #fff4fa;
+
+    margin-bottom: 18px;
 }
 
 .big-title {
     font-family: "Delius", cursive;
-    font-size: 43px;
+
+    font-size: 42px;
+
     line-height: 1.15;
-    color: #fff;
-    text-shadow: 0 3px 10px rgba(0,0,0,0.25);
+
+    color: white;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,0.25);
 }
 
 .sub-title {
-    font-size: 23px;
+    font-size: 22px;
+
+    color: #ffe4f1;
+
     margin-top: 8px;
-    color: #ffe7f3;
 }
 
 
-/* =====================================================
+/* =========================================================
    BUTTON
-===================================================== */
+========================================================= */
 
 .next-btn {
-    margin-top: 25px;
+    margin-top: 22px;
 
     border: none;
     outline: none;
 
-    padding: 10px 27px;
+    padding: 9px 27px;
 
     border-radius: 30px;
 
-    background: linear-gradient(
-        180deg,
-        #f5a9cf,
-        #df7fb1
-    );
+    background:
+        linear-gradient(
+            180deg,
+            #f5afd0,
+            #dc7eaf
+        );
 
     color: white;
 
     font-family: "Patrick Hand", cursive;
-    font-size: 20px;
+
+    font-size: 19px;
 
     cursor: pointer;
 
     box-shadow:
-        0 5px 16px rgba(0,0,0,0.25);
+        0 6px 18px rgba(0,0,0,0.25);
 
     transition: 0.25s;
 }
@@ -205,42 +239,43 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    PAGE 1 - HEART + ARROW
-===================================================== */
+========================================================= */
 
 .first-heart-area {
     position: relative;
-    width: 260px;
-    height: 260px;
 
-    margin-top: 5px;
+    width: 270px;
+    height: 255px;
 }
 
 
-/* heart shape */
+/* Heart */
 
 .start-heart {
     position: absolute;
 
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 95px;
 
-    left: 80px;
-    top: 75px;
+    left: 88px;
+    top: 76px;
 
-    background: #ef7fac;
+    background: #f08ab4;
 
     transform: rotate(-45deg);
 
     border-radius: 12px;
 
-    box-shadow:
-        0 0 30px rgba(255,133,181,0.45);
-
     cursor: pointer;
 
-    transition: 0.25s;
+    box-shadow:
+        0 0 28px rgba(255,139,190,0.5);
+
+    z-index: 3;
+
+    transition: 0.2s;
 }
 
 .start-heart:before,
@@ -249,51 +284,47 @@ body {
 
     position: absolute;
 
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 95px;
 
-    background: #ef7fac;
+    background: #f08ab4;
 
     border-radius: 50%;
 }
 
 .start-heart:before {
-    top: -50px;
+    top: -47px;
     left: 0;
 }
 
 .start-heart:after {
     top: 0;
-    left: 50px;
-}
-
-.start-heart:hover {
-    transform: rotate(-45deg) scale(1.08);
+    left: 47px;
 }
 
 
-/* arrow */
+/* Arrow */
 
 .arrow {
     position: absolute;
 
-    width: 120px;
+    width: 125px;
     height: 6px;
 
-    background: #6e243f;
+    left: 112px;
+    top: 108px;
 
-    top: 105px;
-    left: 115px;
-
-    transform: rotate(-42deg);
-
-    transform-origin: left center;
+    background: #67233d;
 
     border-radius: 10px;
 
-    z-index: 10;
+    transform: rotate(-40deg);
 
-    animation: arrowFloat 1.5s infinite alternate;
+    transform-origin: left center;
+
+    z-index: 8;
+
+    animation: arrowMove 1.4s infinite alternate;
 }
 
 .arrow:after {
@@ -304,53 +335,70 @@ body {
     right: -2px;
     top: -7px;
 
-    border-left: 18px solid #6e243f;
+    border-left: 18px solid #67233d;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
 }
 
-@keyframes arrowFloat {
+@keyframes arrowMove {
+
     from {
-        transform: rotate(-42deg) translateX(0);
+        transform:
+            rotate(-40deg)
+            translateX(0);
     }
 
     to {
-        transform: rotate(-42deg) translateX(7px);
+        transform:
+            rotate(-40deg)
+            translateX(8px);
     }
 }
 
 
-/* =====================================================
-   HEART BLAST
-===================================================== */
+/* Heart blast */
 
 .blast-heart {
-    animation: heartBlast 0.65s forwards;
+    animation:
+        heartBlast 0.65s forwards;
 }
 
 @keyframes heartBlast {
+
     0% {
-        transform: rotate(-45deg) scale(1);
+        transform:
+            rotate(-45deg)
+            scale(1);
+
         opacity: 1;
     }
 
     50% {
-        transform: rotate(-45deg) scale(1.5);
+        transform:
+            rotate(-45deg)
+            scale(1.5);
+
         opacity: 0.8;
     }
 
     100% {
-        transform: rotate(-45deg) scale(0);
+        transform:
+            rotate(-45deg)
+            scale(0);
+
         opacity: 0;
     }
 }
+
+
+/* Pink spread */
 
 .pink-flash {
     position: fixed;
 
     inset: 0;
 
-    background: #f49ac3;
+    background: #ef94bd;
 
     opacity: 0;
 
@@ -360,15 +408,17 @@ body {
 }
 
 .pink-flash.show {
-    animation: pinkSpread 1.1s forwards;
+    animation:
+        pinkSpread 1.1s forwards;
 }
 
 @keyframes pinkSpread {
+
     0% {
         opacity: 0;
     }
 
-    25% {
+    20% {
         opacity: 0.95;
     }
 
@@ -378,27 +428,32 @@ body {
 }
 
 
-/* =====================================================
-   PARTICLES
-===================================================== */
+/* =========================================================
+   CONFETTI / PAPER PIECES
+========================================================= */
 
 .particle {
     position: fixed;
 
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 10px;
 
     pointer-events: none;
 
-    z-index: 1001;
+    z-index: 2000;
 
-    animation: particleFly 1.2s ease-out forwards;
+    animation:
+        particleFly 1.4s ease-out forwards;
 }
 
 @keyframes particleFly {
 
     0% {
-        transform: translate(0,0) scale(1);
+        transform:
+            translate(0,0)
+            rotate(0deg)
+            scale(1);
+
         opacity: 1;
     }
 
@@ -408,357 +463,416 @@ body {
                 var(--x),
                 var(--y)
             )
-            rotate(360deg)
-            scale(0.2);
+            rotate(720deg)
+            scale(0.4);
 
         opacity: 0;
     }
 }
 
 
-/* =====================================================
-   PAGE 2 - TREE
-===================================================== */
+/* =========================================================
+   PAGE 2 - PROPER ANIMATED TREE
+========================================================= */
 
-.tree-area {
+.tree-wrapper {
     position: relative;
 
-    width: 330px;
-    height: 390px;
+    width: 370px;
+    height: 420px;
 
-    margin-top: -5px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: -8px;
 }
 
 
-/* ground */
+/* Tree SVG */
+
+.tree-svg {
+    width: 350px;
+    height: 410px;
+
+    overflow: visible;
+}
+
+
+/* Ground */
 
 .tree-ground {
-    position: absolute;
+    opacity: 0;
 
-    width: 190px;
-    height: 12px;
+    animation:
+        groundAppear 0.8s 0.4s forwards;
+}
 
-    left: 70px;
-    bottom: 28px;
+@keyframes groundAppear {
 
-    background: rgba(20,5,20,0.25);
+    from {
+        opacity: 0;
+        transform: scaleX(0.3);
+    }
 
-    border-radius: 50%;
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
 }
 
 
-/* trunk */
+/* Main trunk */
 
-.tree-trunk {
-    position: absolute;
+.trunk {
+    stroke-dasharray: 330;
+    stroke-dashoffset: 330;
 
-    width: 19px;
-    height: 245px;
+    animation:
+        treeGrow 1.7s 0.2s ease-out forwards;
+}
 
-    left: 156px;
-    bottom: 35px;
+@keyframes treeGrow {
 
-    background: linear-gradient(
-        90deg,
-        #542030,
-        #793146,
-        #542030
-    );
-
-    border-radius: 10px;
-
-    box-shadow:
-        inset 3px 0 rgba(255,255,255,0.08);
-
-    z-index: 2;
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 
-/* branches */
+/* Branches */
 
 .branch {
-    position: absolute;
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
 
-    height: 12px;
-
-    background: #60263b;
-
-    border-radius: 12px;
-
-    transform-origin: left center;
-
-    z-index: 1;
+    animation:
+        branchGrow 0.8s ease-out forwards;
 }
 
-.branch1 {
-    width: 125px;
-
-    left: 162px;
-    bottom: 210px;
-
-    transform: rotate(-35deg);
+.branch.b1 {
+    animation-delay: 1.35s;
 }
 
-.branch2 {
-    width: 120px;
-
-    left: 158px;
-    bottom: 175px;
-
-    transform: rotate(31deg);
+.branch.b2 {
+    animation-delay: 1.55s;
 }
 
-.branch3 {
-    width: 115px;
-
-    left: 156px;
-    bottom: 135px;
-
-    transform: rotate(-40deg);
+.branch.b3 {
+    animation-delay: 1.75s;
 }
 
-.branch4 {
-    width: 100px;
+.branch.b4 {
+    animation-delay: 1.95s;
+}
 
-    left: 157px;
-    bottom: 110px;
+.branch.b5 {
+    animation-delay: 2.15s;
+}
 
-    transform: rotate(35deg);
+@keyframes branchGrow {
+
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 
-/* little branches */
+/* Heart leaves */
 
-.branch1:after,
-.branch2:after,
-.branch3:after,
-.branch4:after {
-    content: "";
+.tree-leaf {
+    opacity: 0;
 
-    position: absolute;
+    transform-box: fill-box;
 
-    width: 60px;
-    height: 7px;
+    transform-origin: center;
 
-    background: #60263b;
-
-    border-radius: 8px;
-
-    top: 0;
+    animation:
+        leafPop 0.55s ease-out forwards;
 }
 
-.branch1:after {
-    right: 15px;
-    transform: rotate(35deg);
-}
+.tree-leaf.l1 { animation-delay: 2.05s; }
+.tree-leaf.l2 { animation-delay: 2.18s; }
+.tree-leaf.l3 { animation-delay: 2.31s; }
+.tree-leaf.l4 { animation-delay: 2.44s; }
+.tree-leaf.l5 { animation-delay: 2.57s; }
+.tree-leaf.l6 { animation-delay: 2.70s; }
+.tree-leaf.l7 { animation-delay: 2.83s; }
+.tree-leaf.l8 { animation-delay: 2.96s; }
+.tree-leaf.l9 { animation-delay: 3.09s; }
+.tree-leaf.l10 { animation-delay: 3.22s; }
+.tree-leaf.l11 { animation-delay: 3.35s; }
+.tree-leaf.l12 { animation-delay: 3.48s; }
 
-.branch2:after {
-    right: 10px;
-    transform: rotate(-40deg);
-}
+@keyframes leafPop {
 
-.branch3:after {
-    right: 5px;
-    transform: rotate(35deg);
-}
+    0% {
+        opacity: 0;
 
-.branch4:after {
-    right: 0;
-    transform: rotate(-35deg);
-}
+        transform:
+            scale(0)
+            rotate(-25deg);
+    }
 
+    65% {
+        opacity: 1;
 
-/* heart leaves */
+        transform:
+            scale(1.12)
+            rotate(7deg);
+    }
 
-.leaf {
-    position: absolute;
+    100% {
+        opacity: 1;
 
-    width: 37px;
-    height: 37px;
-
-    background: #f59bc2;
-
-    transform: rotate(-45deg);
-
-    border-radius: 8px;
-
-    z-index: 5;
-
-    filter:
-        drop-shadow(0 3px 4px rgba(0,0,0,0.15));
-}
-
-.leaf:before,
-.leaf:after {
-    content: "";
-
-    position: absolute;
-
-    width: 37px;
-    height: 37px;
-
-    background: #f59bc2;
-
-    border-radius: 50%;
-}
-
-.leaf:before {
-    top: -18px;
-    left: 0;
-}
-
-.leaf:after {
-    left: 18px;
-    top: 0;
+        transform:
+            scale(1)
+            rotate(0deg);
+    }
 }
 
 
-/* leaf positions */
+/* little leaf shine */
 
-.l1 { left: 115px; top: 65px; }
-.l2 { left: 160px; top: 78px; }
-.l3 { left: 205px; top: 66px; }
-.l4 { left: 91px; top: 115px; }
-.l5 { left: 143px; top: 120px; }
-.l6 { left: 197px; top: 112px; }
-.l7 { left: 115px; top: 160px; }
-.l8 { left: 170px; top: 157px; }
-.l9 { left: 218px; top: 154px; }
+.leaf-shine {
+    opacity: 0;
+
+    animation:
+        shineAppear 0.5s 3.6s forwards;
+}
+
+@keyframes shineAppear {
+
+    to {
+        opacity: 0.35;
+    }
+}
 
 
-/* =====================================================
+/* =========================================================
    PAGE 3 - CAKE
-===================================================== */
+========================================================= */
 
 .cake-area {
     position: relative;
 
-    width: 330px;
-    height: 410px;
+    width: 350px;
+    height: 430px;
 
-    margin-top: -10px;
+    margin-top: -12px;
 }
 
 
-/* cake plate */
+/* Plate */
 
 .plate {
     position: absolute;
 
-    width: 250px;
-    height: 20px;
+    width: 260px;
+    height: 22px;
 
-    bottom: 30px;
-    left: 40px;
+    left: 45px;
+    bottom: 35px;
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,0.82);
+    background: #fff8fc;
 
     box-shadow:
-        0 5px 10px rgba(0,0,0,0.2);
+        0 7px 14px rgba(0,0,0,0.2);
 }
 
 
-/* cake layers */
+/* Cake layers */
 
 .cake-layer {
     position: absolute;
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%)
+        translateY(-330px);
 
-    width: 205px;
+    opacity: 0;
 
     border-radius: 9px;
 
-    background: linear-gradient(
-        180deg,
-        #f6b0cf,
-        #dc7cae
-    );
+    background:
+        linear-gradient(
+            180deg,
+            #f7b4d1,
+            #db79aa
+        );
 
     box-shadow:
-        0 7px 12px rgba(0,0,0,0.22);
-
-    opacity: 0;
+        0 8px 14px rgba(0,0,0,0.25);
 }
 
 
-/* bottom layer */
+/* Bottom */
 
 .layer3 {
-    height: 67px;
+    width: 245px;
+    height: 68px;
 
-    bottom: 47px;
-
-    width: 230px;
+    bottom: 52px;
 }
 
 
-/* middle layer */
+/* Middle */
 
 .layer2 {
+    width: 210px;
     height: 62px;
 
-    bottom: 105px;
-
-    width: 195px;
+    bottom: 110px;
 }
 
 
-/* top layer */
+/* Top */
 
 .layer1 {
+    width: 165px;
     height: 55px;
 
-    bottom: 158px;
-
-    width: 155px;
+    bottom: 162px;
 }
 
 
-/* cream */
+/* Layer falling */
+
+.cake-area.build .layer3 {
+    animation:
+        cakeFall 0.75s 0.2s ease-out forwards;
+}
+
+.cake-area.build .layer2 {
+    animation:
+        cakeFall 0.75s 1.0s ease-out forwards;
+}
+
+.cake-area.build .layer1 {
+    animation:
+        cakeFall 0.75s 1.8s ease-out forwards;
+}
+
+@keyframes cakeFall {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(-330px)
+            rotate(-5deg);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(10px)
+            rotate(2deg);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            rotate(0deg);
+    }
+}
+
+
+/* Cream */
 
 .cream {
     position: absolute;
 
     left: 50%;
 
-    transform: translateX(-50%);
-
-    width: 145px;
-    height: 14px;
-
-    border-radius: 50%;
-
-    background: #fff9fc;
+    transform:
+        translateX(-50%)
+        translateY(-280px);
 
     opacity: 0;
 
-    z-index: 4;
+    height: 15px;
+
+    border-radius: 50%;
+
+    background: #fffaff;
+
+    z-index: 5;
 }
 
-
-/* positions */
-
 .cream1 {
-    bottom: 153px;
+    width: 150px;
+    bottom: 155px;
 }
 
 .cream2 {
-    bottom: 100px;
-    width: 184px;
+    width: 198px;
+    bottom: 105px;
 }
 
 .cream3 {
-    bottom: 43px;
-    width: 220px;
+    width: 232px;
+    bottom: 47px;
 }
 
 
-/* candle */
+.cake-area.build .cream1 {
+    animation:
+        creamFall 0.55s 2.45s forwards;
+}
+
+.cake-area.build .cream2 {
+    animation:
+        creamFall 0.55s 2.7s forwards;
+}
+
+.cake-area.build .cream3 {
+    animation:
+        creamFall 0.55s 2.95s forwards;
+}
+
+@keyframes creamFall {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(-280px)
+            scaleX(0.7);
+    }
+
+    70% {
+        transform:
+            translateX(-50%)
+            translateY(7px)
+            scaleX(1.05);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scaleX(1);
+    }
+}
+
+
+/* Candle */
 
 .candle {
     position: absolute;
@@ -768,235 +882,173 @@ body {
 
     left: 50%;
 
-    bottom: 213px;
+    bottom: 215px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%)
+        translateY(-220px);
+
+    opacity: 0;
+
+    z-index: 8;
+
+    border-radius: 5px;
 
     background:
         repeating-linear-gradient(
             -45deg,
-            #fff,
-            #fff 8px,
-            #f2a5c8 8px,
-            #f2a5c8 16px
+            #ffffff 0px,
+            #ffffff 8px,
+            #efa2c5 8px,
+            #efa2c5 16px
         );
-
-    border-radius: 5px;
-
-    opacity: 0;
-
-    z-index: 6;
 }
 
-
-/* flame */
-
-.flame {
-    position: absolute;
-
-    width: 18px;
-    height: 28px;
-
-    left: 50%;
-
-    bottom: 283px;
-
-    transform:
-        translateX(-50%)
-        rotate(45deg);
-
-    background: #ffe79c;
-
-    border-radius:
-        50% 50% 50% 0;
-
-    opacity: 0;
-
-    box-shadow:
-        0 0 15px #ffd67b;
-}
-
-
-/* cake falling animations */
-
-.cake-area.build .layer3 {
-    animation: layerDrop 0.65s 0.2s forwards;
-}
-
-.cake-area.build .layer2 {
-    animation: layerDrop 0.65s 0.9s forwards;
-}
-
-.cake-area.build .layer1 {
-    animation: layerDrop 0.65s 1.6s forwards;
-}
-
-.cake-area.build .cream1 {
-    animation: creamAppear 0.45s 2.15s forwards;
-}
-
-.cake-area.build .cream2 {
-    animation: creamAppear 0.45s 2.45s forwards;
-}
-
-.cake-area.build .cream3 {
-    animation: creamAppear 0.45s 2.75s forwards;
-}
 
 .cake-area.build .candle {
-    animation: candleDrop 0.7s 3.1s forwards;
-}
-
-.cake-area.build .flame {
     animation:
-        flameDrop 0.6s 3.55s forwards,
-        flicker 0.8s 4.15s infinite alternate;
+        candleFall 0.7s 3.35s ease-out forwards;
 }
 
-
-@keyframes layerDrop {
-
-    0% {
-        transform:
-            translate(-50%, -280px)
-            scale(0.9);
-
-        opacity: 0;
-    }
-
-    70% {
-        transform:
-            translate(-50%, 10px)
-            scale(1.03);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(-50%, 0)
-            scale(1);
-
-        opacity: 1;
-    }
-}
-
-
-@keyframes creamAppear {
-
-    from {
-        opacity: 0;
-        transform:
-            translateX(-50%)
-            scaleX(0.4);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateX(-50%)
-            scaleX(1);
-    }
-}
-
-
-@keyframes candleDrop {
+@keyframes candleFall {
 
     0% {
         opacity: 0;
+
         transform:
-            translate(-50%, -180px)
+            translateX(-50%)
+            translateY(-220px)
             rotate(-10deg);
     }
 
     75% {
         transform:
-            translate(-50%, 8px)
-            rotate(4deg);
+            translateX(-50%)
+            translateY(8px)
+            rotate(3deg);
     }
 
     100% {
         opacity: 1;
+
         transform:
-            translate(-50%, 0)
-            rotate(0);
+            translateX(-50%)
+            translateY(0)
+            rotate(0deg);
     }
 }
 
 
-@keyframes flameDrop {
+/* Flame */
 
-    0% {
+.flame {
+    position: absolute;
+
+    width: 20px;
+    height: 28px;
+
+    left: 50%;
+
+    bottom: 282px;
+
+    transform:
+        translateX(-50%)
+        translateY(-150px)
+        rotate(45deg);
+
+    opacity: 0;
+
+    z-index: 9;
+
+    background: #ffe59a;
+
+    border-radius:
+        50% 50% 50% 0;
+
+    box-shadow:
+        0 0 18px #ffd66d;
+}
+
+
+.cake-area.build .flame {
+    animation:
+        flameFall 0.55s 4.0s forwards,
+        flicker 0.8s 4.55s infinite alternate;
+}
+
+@keyframes flameFall {
+
+    from {
         opacity: 0;
+
         transform:
-            translate(-50%, -150px)
+            translateX(-50%)
+            translateY(-150px)
             rotate(45deg);
     }
 
-    100% {
+    to {
         opacity: 1;
+
         transform:
-            translate(-50%, 0)
+            translateX(-50%)
+            translateY(0)
             rotate(45deg);
     }
 }
-
 
 @keyframes flicker {
+
     from {
         transform:
             translateX(-50%)
-            rotate(42deg)
+            rotate(40deg)
             scale(0.9);
     }
 
     to {
         transform:
             translateX(-50%)
-            rotate(48deg)
-            scale(1.05);
+            rotate(50deg)
+            scale(1.08);
     }
 }
 
 
-/* birthday text */
+/* Cake message */
 
 .cake-message {
     position: absolute;
 
     left: 50%;
 
-    bottom: -10px;
-
-    transform: translateX(-50%);
+    bottom: -4px;
 
     width: 100%;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    opacity: 0;
 
     font-family: "Delius", cursive;
 
     font-size: 36px;
-    line-height: 1.15;
 
-    color: white;
-
-    opacity: 0;
+    line-height: 1.12;
 }
 
 .cake-message.show {
-    animation: messageAppear 1s 4s forwards;
+    animation:
+        cakeMessageShow 0.8s 4.45s forwards;
 }
 
-@keyframes messageAppear {
-
-    from {
-        opacity: 0;
-        transform:
-            translateX(-50%)
-            translateY(20px);
-    }
+@keyframes cakeMessageShow {
 
     to {
         opacity: 1;
+
         transform:
             translateX(-50%)
             translateY(0);
@@ -1004,44 +1056,43 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    PAGE 4 - BALLOONS
-===================================================== */
+========================================================= */
 
 .balloon-title {
     font-size: 25px;
-    margin-bottom: 25px;
-}
 
+    margin-bottom: 22px;
+}
 
 .balloon-area {
-    width: 360px;
-    height: 330px;
-
     position: relative;
+
+    width: 370px;
+    height: 350px;
 }
 
+
+/* Balloon */
 
 .balloon {
     position: absolute;
 
-    width: 75px;
-    height: 95px;
+    width: 78px;
+    height: 100px;
 
     border-radius:
-        50% 50% 45% 45%;
+        50% 50% 46% 46%;
 
     cursor: pointer;
 
-    transition: 0.15s;
-
     box-shadow:
-        inset -12px -9px 18px rgba(0,0,0,0.13),
-        inset 8px 5px 10px rgba(255,255,255,0.25);
+        inset -12px -10px 18px rgba(0,0,0,0.13),
+        inset 8px 5px 12px rgba(255,255,255,0.3);
 
-    z-index: 4;
+    transition: 0.15s;
 }
-
 
 .balloon:after {
     content: "";
@@ -1049,14 +1100,13 @@ body {
     position: absolute;
 
     width: 2px;
-    height: 95px;
+    height: 105px;
 
-    background: rgba(255,255,255,0.65);
-
-    top: 93px;
     left: 50%;
-}
+    top: 97px;
 
+    background: rgba(255,255,255,0.6);
+}
 
 .balloon:before {
     content: "";
@@ -1066,10 +1116,8 @@ body {
     bottom: -7px;
     left: 50%;
 
-    transform: translateX(-50%);
-
-    width: 0;
-    height: 0;
+    transform:
+        translateX(-50%);
 
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
@@ -1079,57 +1127,61 @@ body {
 
 .b1 {
     left: 40px;
-    top: 45px;
+    top: 55px;
 
-    background: #f6a4c7;
-    color: #f6a4c7;
+    background: #f3a2c5;
+    color: #f3a2c5;
 }
 
 .b2 {
-    left: 135px;
-    top: 5px;
+    left: 145px;
+    top: 10px;
 
-    background: #e9b0df;
-    color: #e9b0df;
+    background: #e4afd9;
+    color: #e4afd9;
 }
 
 .b3 {
-    left: 225px;
-    top: 48px;
+    left: 250px;
+    top: 55px;
 
-    background: #a9c3dc;
-    color: #a9c3dc;
+    background: #a8c4dd;
+    color: #a8c4dd;
 }
 
 .b4 {
-    left: 128px;
-    top: 125px;
+    left: 145px;
+    top: 145px;
 
-    background: #f3c0dc;
-    color: #f3c0dc;
+    background: #f2bad7;
+    color: #f2bad7;
 }
 
 
 .balloon:hover {
-    transform: translateY(-5px) scale(1.05);
+    transform:
+        translateY(-6px)
+        scale(1.05);
 }
 
+
+/* POP */
 
 .balloon.popped {
-    animation: popBalloon 0.35s forwards;
+    animation:
+        balloonPop 0.35s forwards;
 }
 
-
-@keyframes popBalloon {
+@keyframes balloonPop {
 
     0% {
         transform: scale(1);
         opacity: 1;
     }
 
-    50% {
-        transform: scale(1.3);
-        opacity: 0.8;
+    40% {
+        transform: scale(1.25);
+        opacity: 0.9;
     }
 
     100% {
@@ -1139,42 +1191,47 @@ body {
 }
 
 
-/* balloon messages */
+/* Balloon message */
 
 .balloon-message {
     position: absolute;
 
-    width: 310px;
-
     left: 50%;
-    bottom: 8px;
+    bottom: 5px;
 
-    transform: translateX(-50%) translateY(20px);
+    width: 320px;
 
-    font-size: 22px;
-
-    color: #fff5fb;
+    transform:
+        translateX(-50%)
+        translateY(20px);
 
     opacity: 0;
+
+    font-size: 21px;
+
+    color: #fff5fb;
 
     transition: 0.4s;
 }
 
 .balloon-message.show {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+
+    transform:
+        translateX(-50%)
+        translateY(0);
 }
 
 
-/* =====================================================
+/* =========================================================
    PAGE 5 - PHOTOS
-===================================================== */
+========================================================= */
 
 .memory-title {
     font-size: 25px;
+
     margin-bottom: 25px;
 }
-
 
 .photo-container {
     display: flex;
@@ -1188,13 +1245,15 @@ body {
     max-width: 900px;
 }
 
-
 .photo-card {
     width: 230px;
 
-    padding: 9px 9px 16px;
+    padding:
+        9px
+        9px
+        15px;
 
-    background: #fff;
+    background: white;
 
     border-radius: 4px;
 
@@ -1206,7 +1265,6 @@ body {
     transition: 0.3s;
 }
 
-
 .photo-card:nth-child(2) {
     transform: rotate(2deg);
 }
@@ -1215,19 +1273,16 @@ body {
     transform: rotate(-1deg);
 }
 
-
 .photo-card:hover {
     transform:
         rotate(0deg)
         translateY(-8px);
 }
 
-
 .photo-card img {
     display: block;
 
     width: 100%;
-
     height: 230px;
 
     object-fit: cover;
@@ -1235,61 +1290,87 @@ body {
     border-radius: 2px;
 }
 
-
 .photo-caption {
     color: #562047;
 
-    font-size: 20px;
-
-    margin-top: 10px;
+    font-size: 19px;
 
     line-height: 1.1;
+
+    margin-top: 10px;
 }
 
 
-/* =====================================================
+/* =========================================================
    PAGE 6 - ENVELOPE
-===================================================== */
+========================================================= */
 
 .envelope-page {
     justify-content: center;
 }
 
 
-/* envelope wrapper */
+/* Wrapper stays CENTER */
 
 .envelope-wrap {
     position: relative;
 
     width: 360px;
-    height: 270px;
+    height: 280px;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+}
+
+.envelope-wrap.enter {
+    animation:
+        envelopeAppear 1s ease-out forwards;
+}
+
+@keyframes envelopeAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.75)
+            translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
 }
 
 
-/* envelope */
+/* Envelope */
 
 .envelope {
     position: relative;
 
-    width: 290px;
-    height: 185px;
+    width: 300px;
+    height: 190px;
 
-    background: #f5b3cf;
+    background: #f4afd0;
 
     border-radius: 8px;
 
     box-shadow:
-        0 12px 25px rgba(0,0,0,0.25);
+        0 12px 28px rgba(0,0,0,0.28);
 
     cursor: pointer;
-
-    transition: 0.6s;
 }
 
+
+/* Top flap */
 
 .envelope:before {
     content: "";
@@ -1299,19 +1380,22 @@ body {
     left: 0;
     top: 0;
 
-    border-left: 145px solid transparent;
-    border-right: 145px solid transparent;
-    border-top: 100px solid #e892ba;
+    width: 0;
+    height: 0;
 
-    z-index: 4;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 105px solid #e38bb6;
 
     transform-origin: top center;
 
     transition: 0.7s;
+
+    z-index: 6;
 }
 
 
-/* lower folds */
+/* Bottom fold */
 
 .envelope:after {
     content: "";
@@ -1324,12 +1408,14 @@ body {
     width: 0;
     height: 0;
 
-    border-left: 145px solid #ef9fc3;
-    border-top: 92px solid transparent;
+    border-left: 150px solid #ef9fc3;
+    border-top: 95px solid transparent;
 
-    z-index: 3;
+    z-index: 5;
 }
 
+
+/* Letter */
 
 .envelope-letter {
     position: absolute;
@@ -1339,43 +1425,44 @@ body {
 
     bottom: 8px;
 
-    height: 150px;
+    height: 155px;
+
+    padding:
+        18px
+        17px;
 
     background: #fff7ed;
 
     color: #4b2943;
 
-    padding: 22px 18px;
-
     border-radius: 5px;
 
-    font-family: "Patrick Hand", cursive;
+    font-size: 17px;
 
-    font-size: 18px;
-
-    line-height: 1.2;
+    line-height: 1.18;
 
     text-align: left;
 
-    z-index: 2;
+    overflow: auto;
 
     transition: 0.7s;
 
-    overflow: auto;
+    z-index: 2;
 }
 
 
 .envelope.open:before {
-    transform: rotateX(180deg);
+    transform:
+        rotateX(180deg);
 }
 
-
 .envelope.open .envelope-letter {
-    transform: translateY(-115px);
+    transform:
+        translateY(-120px);
 
-    z-index: 7;
+    height: 245px;
 
-    height: 235px;
+    z-index: 10;
 }
 
 
@@ -1386,68 +1473,44 @@ body {
 
     font-size: 24px;
 
-    margin-bottom: 10px;
-
     color: #7b315c;
+
+    margin-bottom: 10px;
 }
 
 
 .from {
     text-align: right;
 
-    margin-top: 13px;
-
     font-size: 21px;
 
-    color: #8c3567;
+    color: #8d3265;
+
+    margin-top: 12px;
 }
 
 
-/* envelope animation entering from side */
-
-.envelope-wrap.enter {
-    animation: envelopeEnter 1.3s ease-out forwards;
-}
-
-@keyframes envelopeEnter {
-
-    from {
-        transform:
-            translateX(380px)
-            scale(0.85);
-
-        opacity: 0;
-    }
-
-    to {
-        transform:
-            translateX(0)
-            scale(1);
-
-        opacity: 1;
-    }
-}
-
-
-/* =====================================================
+/* =========================================================
    PAGE 7 - FINAL
-===================================================== */
+========================================================= */
 
 .final-heart {
     position: relative;
 
-    width: 120px;
-    height: 120px;
+    width: 115px;
+    height: 115px;
 
-    background: #e63f62;
+    background: #e74468;
 
-    transform: rotate(-45deg);
+    transform:
+        rotate(-45deg);
 
     border-radius: 15px;
 
-    margin-bottom: 40px;
+    margin-bottom: 42px;
 
-    animation: heartBeat 1.2s infinite;
+    animation:
+        heartBeat 1.2s infinite;
 }
 
 .final-heart:before,
@@ -1456,33 +1519,37 @@ body {
 
     position: absolute;
 
-    width: 120px;
-    height: 120px;
+    width: 115px;
+    height: 115px;
 
-    background: #e63f62;
+    background: #e74468;
 
     border-radius: 50%;
 }
 
 .final-heart:before {
-    top: -60px;
+    top: -57px;
     left: 0;
 }
 
 .final-heart:after {
     top: 0;
-    left: 60px;
+    left: 57px;
 }
 
 
 @keyframes heartBeat {
 
-    0%,100% {
-        transform: rotate(-45deg) scale(1);
+    0%, 100% {
+        transform:
+            rotate(-45deg)
+            scale(1);
     }
 
     50% {
-        transform: rotate(-45deg) scale(1.08);
+        transform:
+            rotate(-45deg)
+            scale(1.09);
     }
 }
 
@@ -1490,28 +1557,25 @@ body {
 .final-title {
     font-family: "Delius", cursive;
 
-    font-size: 48px;
+    font-size: 47px;
 
     line-height: 1.1;
-
-    color: white;
 }
-
 
 .final-name {
     font-family: "Delius", cursive;
 
-    font-size: 38px;
+    font-size: 39px;
 
-    margin-top: 5px;
+    color: #f7b1cf;
 
-    color: #f8b3d1;
+    margin-top: 6px;
 }
 
 
-/* =====================================================
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -1519,21 +1583,28 @@ body {
         font-size: 34px;
     }
 
-    .final-title {
-        font-size: 38px;
+    .tree-wrapper {
+        transform: scale(0.82);
+
+        margin-top: -35px;
+        margin-bottom: -35px;
     }
 
-    .final-name {
-        font-size: 31px;
+    .cake-area {
+        transform: scale(0.82);
+
+        margin-top: -45px;
+        margin-bottom: -35px;
     }
 
     .photo-container {
-        gap: 8px;
+        gap: 7px;
     }
 
     .photo-card {
-        width: 30%;
-        padding: 5px 5px 10px;
+        width: 31%;
+
+        padding: 5px;
     }
 
     .photo-card img {
@@ -1541,25 +1612,46 @@ body {
     }
 
     .photo-caption {
-        font-size: 14px;
-    }
-
-    .tree-area {
-        transform: scale(0.85);
-        margin-top: -20px;
-    }
-
-    .cake-area {
-        transform: scale(0.82);
-        margin-top: -35px;
+        font-size: 13px;
     }
 
     .envelope-wrap {
-        transform: scale(0.88);
+        transform: scale(0.86);
+    }
+
+    .envelope-wrap.enter {
+        animation:
+            envelopeAppearMobile 1s ease-out forwards;
+    }
+
+    @keyframes envelopeAppearMobile {
+
+        from {
+            opacity: 0;
+            transform:
+                scale(0.7)
+                translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                scale(0.86)
+                translateY(0);
+        }
+    }
+
+    .final-title {
+        font-size: 38px;
+    }
+
+    .final-name {
+        font-size: 32px;
     }
 }
 
 </style>
+
 </head>
 
 
@@ -1567,7 +1659,8 @@ body {
 
 <div class="app">
 
-    <!-- stars -->
+    <!-- STARS -->
+
     <div class="star s1"></div>
     <div class="star s2"></div>
     <div class="star s3"></div>
@@ -1577,20 +1670,27 @@ body {
     <div class="star s7"></div>
     <div class="star s8"></div>
     <div class="star s9"></div>
+    <div class="star s10"></div>
 
 
-    <div class="pink-flash" id="pinkFlash"></div>
+    <div
+        class="pink-flash"
+        id="pinkFlash">
+    </div>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PAGE 1
-    ================================================== -->
+    ====================================================== -->
 
-    <section class="page active" id="page1">
+    <section
+        class="page active"
+        id="page1">
 
         <div class="small-title">
             First things first
         </div>
+
 
         <div class="first-heart-area">
 
@@ -1604,6 +1704,7 @@ body {
 
         </div>
 
+
         <div class="big-title">
             A little surprise
         </div>
@@ -1615,124 +1716,374 @@ body {
     </section>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PAGE 2 - TREE
-    ================================================== -->
+    ====================================================== -->
 
-    <section class="page" id="page2">
+    <section
+        class="page"
+        id="page2">
 
         <div class="small-title">
             Something special is growing...
         </div>
 
-        <div class="tree-area">
 
-            <div class="tree-ground"></div>
+        <div class="tree-wrapper">
 
-            <div class="tree-trunk"></div>
+            <svg
+                class="tree-svg"
+                viewBox="0 0 350 410"
+                xmlns="http://www.w3.org/2000/svg">
 
-            <div class="branch branch1"></div>
-            <div class="branch branch2"></div>
-            <div class="branch branch3"></div>
-            <div class="branch branch4"></div>
 
-            <div class="leaf l1"></div>
-            <div class="leaf l2"></div>
-            <div class="leaf l3"></div>
-            <div class="leaf l4"></div>
-            <div class="leaf l5"></div>
-            <div class="leaf l6"></div>
-            <div class="leaf l7"></div>
-            <div class="leaf l8"></div>
-            <div class="leaf l9"></div>
+                <!-- Ground -->
+
+                <ellipse
+                    class="tree-ground"
+                    cx="175"
+                    cy="385"
+                    rx="100"
+                    ry="13"
+                    fill="#250d24"
+                />
+
+
+                <!-- Main trunk -->
+
+                <path
+                    class="trunk"
+                    d="
+                    M175 375
+                    C174 330 176 285 174 240
+                    C173 205 176 170 175 135
+                    "
+                    fill="none"
+                    stroke="#672b3d"
+                    stroke-width="18"
+                    stroke-linecap="round"
+                />
+
+
+                <!-- Main branches -->
+
+                <path
+                    class="branch b1"
+                    d="M174 245 C145 215 122 190 96 158"
+                    fill="none"
+                    stroke="#672b3d"
+                    stroke-width="10"
+                    stroke-linecap="round"
+                />
+
+                <path
+                    class="branch b2"
+                    d="M175 220 C204 194 226 168 250 135"
+                    fill="none"
+                    stroke="#672b3d"
+                    stroke-width="10"
+                    stroke-linecap="round"
+                />
+
+                <path
+                    class="branch b3"
+                    d="M175 190 C145 164 126 140 116 110"
+                    fill="none"
+                    stroke="#672b3d"
+                    stroke-width="9"
+                    stroke-linecap="round"
+                />
+
+                <path
+                    class="branch b4"
+                    d="M176 175 C204 150 220 125 225 94"
+                    fill="none"
+                    stroke="#672b3d"
+                    stroke-width="9"
+                    stroke-linecap="round"
+                />
+
+                <path
+                    class="branch b5"
+                    d="M174 150 C158 128 151 104 151 78"
+                    fill="none"
+                    stroke="#672b3d"
+                    stroke-width="8"
+                    stroke-linecap="round"
+                />
+
+
+                <!-- HEART LEAVES -->
+
+                <g class="tree-leaf l1" transform="translate(78 132)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f39ac2"/>
+                </g>
+
+
+                <g class="tree-leaf l2" transform="translate(112 99)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f39ac2"/>
+                </g>
+
+
+                <g class="tree-leaf l3" transform="translate(151 65)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f7a7c9"/>
+                </g>
+
+
+                <g class="tree-leaf l4" transform="translate(188 82)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f29bc2"/>
+                </g>
+
+
+                <g class="tree-leaf l5" transform="translate(222 105)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f6a7ca"/>
+                </g>
+
+
+                <g class="tree-leaf l6" transform="translate(246 126)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f39bc3"/>
+                </g>
+
+
+                <g class="tree-leaf l7" transform="translate(106 155)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#ef8fba"/>
+                </g>
+
+
+                <g class="tree-leaf l8" transform="translate(143 137)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f6a2c7"/>
+                </g>
+
+
+                <g class="tree-leaf l9" transform="translate(181 125)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f39ac1"/>
+                </g>
+
+
+                <g class="tree-leaf l10" transform="translate(216 151)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f7a7cb"/>
+                </g>
+
+
+                <g class="tree-leaf l11" transform="translate(132 188)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f39ac1"/>
+                </g>
+
+
+                <g class="tree-leaf l12" transform="translate(204 183)">
+                    <path
+                        d="M0 10
+                           C-18 -7 -30 17 0 38
+                           C30 17 18 -7 0 10Z"
+                        fill="#f49fc5"/>
+                </g>
+
+
+                <!-- small shine -->
+
+                <circle
+                    class="leaf-shine"
+                    cx="106"
+                    cy="125"
+                    r="4"
+                    fill="white"
+                />
+
+            </svg>
 
         </div>
+
 
         <div class="big-title">
             A little tree<br>
             full of love
         </div>
 
-        <button class="next-btn" onclick="showPage(3)">
+
+        <button
+            class="next-btn"
+            onclick="showPage(3)">
             Next
         </button>
 
     </section>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PAGE 3 - CAKE
-    ================================================== -->
+    ====================================================== -->
 
-    <section class="page" id="page3">
+    <section
+        class="page"
+        id="page3">
 
         <div class="small-title">
             Something special is coming...
         </div>
 
-        <div class="cake-area" id="cakeArea">
+
+        <div
+            class="cake-area"
+            id="cakeArea">
+
 
             <div class="plate"></div>
 
-            <div class="cake-layer layer3"></div>
 
-            <div class="cake-layer layer2"></div>
+            <!-- 3 LAYERS -->
 
-            <div class="cake-layer layer1"></div>
+            <div
+                class="cake-layer layer3">
+            </div>
 
-            <div class="cream cream1"></div>
-            <div class="cream cream2"></div>
-            <div class="cream cream3"></div>
 
-            <div class="candle"></div>
+            <div
+                class="cake-layer layer2">
+            </div>
 
-            <div class="flame"></div>
 
-            <div class="cake-message" id="cakeMessage">
+            <div
+                class="cake-layer layer1">
+            </div>
+
+
+            <!-- CREAM -->
+
+            <div
+                class="cream cream1">
+            </div>
+
+            <div
+                class="cream cream2">
+            </div>
+
+            <div
+                class="cream cream3">
+            </div>
+
+
+            <!-- CANDLE -->
+
+            <div
+                class="candle">
+            </div>
+
+
+            <!-- FLAME -->
+
+            <div
+                class="flame">
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                class="cake-message"
+                id="cakeMessage">
+
                 HAPPY BIRTHDAY<br>
                 RICKY
+
             </div>
 
         </div>
 
-        <button class="next-btn" onclick="showPage(4)">
+
+        <button
+            class="next-btn"
+            onclick="showPage(4)">
+
             Continue
+
         </button>
 
     </section>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PAGE 4 - BALLOONS
-    ================================================== -->
+    ====================================================== -->
 
-    <section class="page" id="page4">
+    <section
+        class="page"
+        id="page4">
 
         <div class="balloon-title">
             Pop the balloons
         </div>
 
+
         <div class="balloon-area">
+
 
             <div
                 class="balloon b1"
-                onclick="popBalloon(this, 1)">
+                onclick="popBalloon(this,1)">
             </div>
+
 
             <div
                 class="balloon b2"
-                onclick="popBalloon(this, 2)">
+                onclick="popBalloon(this,2)">
             </div>
+
 
             <div
                 class="balloon b3"
-                onclick="popBalloon(this, 3)">
+                onclick="popBalloon(this,3)">
             </div>
+
 
             <div
                 class="balloon b4"
-                onclick="popBalloon(this, 4)">
+                onclick="popBalloon(this,4)">
             </div>
+
 
             <div
                 class="balloon-message"
@@ -1741,32 +2092,44 @@ body {
 
         </div>
 
+
         <button
             class="next-btn"
             id="balloonNext"
             onclick="showPage(5)"
-            style="opacity:0; pointer-events:none;">
+            style="
+                opacity:0;
+                pointer-events:none;
+            ">
+
             Continue
+
         </button>
 
     </section>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PAGE 5 - PHOTOS
-    ================================================== -->
+    ====================================================== -->
 
-    <section class="page" id="page5">
+    <section
+        class="page"
+        id="page5">
 
         <div class="memory-title">
             A walk down memory lane
         </div>
 
+
         <div class="photo-container">
+
 
             <div class="photo-card">
 
-                <img src="data:image/jpeg;base64,__PHOTO1__">
+                <img
+                    src="data:image/jpeg;base64,__PHOTO1__"
+                >
 
                 <div class="photo-caption">
                     One of my favourite pictures of you
@@ -1777,7 +2140,9 @@ body {
 
             <div class="photo-card">
 
-                <img src="data:image/jpeg;base64,__PHOTO2__">
+                <img
+                    src="data:image/jpeg;base64,__PHOTO2__"
+                >
 
                 <div class="photo-caption">
                     A moment I really love
@@ -1788,7 +2153,9 @@ body {
 
             <div class="photo-card">
 
-                <img src="data:image/jpeg;base64,__PHOTO3__">
+                <img
+                    src="data:image/jpeg;base64,__PHOTO3__"
+                >
 
                 <div class="photo-caption">
                     A picture that always makes me smile
@@ -1798,64 +2165,97 @@ body {
 
         </div>
 
-        <button class="next-btn" onclick="showPage(6)">
+
+        <button
+            class="next-btn"
+            onclick="showPage(6)">
+
             Next
+
         </button>
 
     </section>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PAGE 6 - ENVELOPE
-    ================================================== -->
+    ====================================================== -->
 
-    <section class="page envelope-page" id="page6">
+    <section
+        class="page envelope-page"
+        id="page6">
+
 
         <div class="small-title">
             One little letter for you
         </div>
 
-        <div class="envelope-wrap" id="envelopeWrap">
+
+        <!-- CENTER -->
+
+        <div
+            class="envelope-wrap"
+            id="envelopeWrap">
+
 
             <div
                 class="envelope"
                 id="envelope"
                 onclick="openEnvelope()">
 
+
                 <div class="envelope-letter">
+
 
                     <div class="letter-title">
                         For you
                     </div>
 
+
                     <div>
-                        You are someone very special to me.
-                        Having you in my life makes even the
-                        ordinary moments feel a little more beautiful.
+                        You are someone who has become very
+                        special to my heart.
                     </div>
+
 
                     <br>
 
+
                     <div>
-                        I hope we always keep choosing each other,
-                        supporting each other, and growing together.
-                        If life gives us the chance to walk through
-                        the future together, I would love for that
-                        journey to be filled with understanding,
-                        happiness and lots of little memories.
+                        When I think about the future, I hope
+                        it is filled with two people who understand
+                        each other, support each other and never
+                        stop choosing each other.
                     </div>
+
 
                     <br>
 
+
                     <div>
-                        No matter where life takes us,
-                        I will always be grateful for the beautiful
-                        place you have in my heart.
+                        If life gives us the chance to walk
+                        through that beautiful journey together,
+                        I would love to create a life filled with
+                        peace, laughter, little adventures and
+                        countless memories with you.
                     </div>
+
+
+                    <br>
+
+
+                    <div>
+                        I don't need everything to be perfect.
+                        I just want something real, where we
+                        grow together and stand beside each
+                        other through every chapter.
+                    </div>
+
 
                     <div class="from">
                         From your Maggi ♥
                     </div>
+
 
                 </div>
 
@@ -1863,32 +2263,44 @@ body {
 
         </div>
 
+
         <button
             class="next-btn"
             id="letterNext"
             onclick="showPage(7)"
-            style="opacity:0; pointer-events:none;">
+            style="
+                opacity:0;
+                pointer-events:none;
+            ">
+
             Next
+
         </button>
 
     </section>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PAGE 7 - FINAL
-    ================================================== -->
+    ====================================================== -->
 
-    <section class="page" id="page7">
+    <section
+        class="page"
+        id="page7">
+
 
         <div class="final-heart"></div>
+
 
         <div class="final-title">
             HAPPY BIRTHDAY
         </div>
 
+
         <div class="final-name">
             RICKY ♥
         </div>
+
 
     </section>
 
@@ -1898,28 +2310,55 @@ body {
 
 <script>
 
-/* =====================================================
+/* =========================================================
    PAGE CONTROL
-===================================================== */
+========================================================= */
 
 function showPage(number) {
 
-    document.querySelectorAll(".page").forEach(function(page) {
-        page.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
 
-    const selected = document.getElementById("page" + number);
+            page.classList.remove("active");
+
+        });
+
+
+    const selected =
+        document.getElementById("page" + number);
+
 
     if (selected) {
+
         selected.classList.add("active");
+
     }
 
 
-    /* Cake animation */
+    /* TREE */
+
+    if (number === 2) {
+
+        const tree =
+            document.querySelector(".tree-svg");
+
+        tree.style.display = "none";
+
+        setTimeout(function() {
+
+            tree.style.display = "block";
+
+        }, 20);
+    }
+
+
+    /* CAKE */
 
     if (number === 3) {
 
-        const cake = document.getElementById("cakeArea");
+        const cake =
+            document.getElementById("cakeArea");
 
         cake.classList.remove("build");
 
@@ -1927,23 +2366,32 @@ function showPage(number) {
 
         cake.classList.add("build");
 
+
         setTimeout(function() {
 
             document
                 .getElementById("cakeMessage")
                 .classList.add("show");
 
+        }, 100);
+
+
+        /* candle finished -> colourful paper pop */
+
+        setTimeout(function() {
+
             createConfetti(
                 window.innerWidth / 2,
                 window.innerHeight / 2 - 90,
-                35
+                42
             );
 
-        }, 3900);
+        }, 4450);
+
     }
 
 
-    /* Envelope enters from side but stops at CENTER */
+    /* ENVELOPE */
 
     if (number === 6) {
 
@@ -1955,18 +2403,38 @@ function showPage(number) {
         void wrap.offsetWidth;
 
         wrap.classList.add("enter");
+
     }
+
+
+    /* FINAL PAGE */
+
+    if (number === 7) {
+
+        setTimeout(function() {
+
+            createConfetti(
+                window.innerWidth / 2,
+                window.innerHeight / 2,
+                85
+            );
+
+        }, 450);
+
+    }
+
 }
 
 
-/* =====================================================
-   PAGE 1 HEART BLAST
-===================================================== */
+/* =========================================================
+   STARTING HEART
+========================================================= */
 
 function startSurprise() {
 
     const heart =
         document.getElementById("startHeart");
+
 
     heart.classList.add("blast-heart");
 
@@ -1974,7 +2442,7 @@ function startSurprise() {
     createHeartParticles(
         window.innerWidth / 2,
         window.innerHeight / 2,
-        28
+        30
     );
 
 
@@ -1984,7 +2452,7 @@ function startSurprise() {
             .getElementById("pinkFlash")
             .classList.add("show");
 
-    }, 200);
+    }, 150);
 
 
     setTimeout(function() {
@@ -1992,121 +2460,168 @@ function startSurprise() {
         showPage(2);
 
     }, 850);
+
 }
 
 
-/* =====================================================
+/* =========================================================
    HEART PARTICLES
-===================================================== */
+========================================================= */
 
 function createHeartParticles(x, y, amount) {
 
     for (let i = 0; i < amount; i++) {
 
-        const p = document.createElement("div");
+        const p =
+            document.createElement("div");
+
 
         p.className = "particle";
 
+
         p.innerHTML = "♥";
 
-        p.style.fontSize =
-            (10 + Math.random() * 12) + "px";
 
-        p.style.color =
-            "#f49ac3";
+        p.style.width = "auto";
+        p.style.height = "auto";
+
+
+        p.style.fontSize =
+            (9 + Math.random() * 12) + "px";
+
+
+        p.style.color = "#f39ac1";
+
 
         p.style.left = x + "px";
         p.style.top = y + "px";
 
+
         const angle =
             Math.random() * Math.PI * 2;
 
+
         const distance =
             70 + Math.random() * 220;
+
 
         p.style.setProperty(
             "--x",
             Math.cos(angle) * distance + "px"
         );
 
+
         p.style.setProperty(
             "--y",
             Math.sin(angle) * distance + "px"
         );
 
+
         document.body.appendChild(p);
 
+
         setTimeout(function() {
+
             p.remove();
-        }, 1300);
+
+        }, 1500);
+
     }
+
 }
 
 
-/* =====================================================
-   CONFETTI
-===================================================== */
+/* =========================================================
+   COLOURFUL PAPER CONFETTI
+========================================================= */
 
 function createConfetti(x, y, amount) {
 
     const colors = [
-        "#f7a8c8",
-        "#ffd1e3",
-        "#b9d8f0",
-        "#e9b2dd",
-        "#fff2b8",
-        "#ffffff"
+        "#f5a3c8",
+        "#ffd2e5",
+        "#b9d7ed",
+        "#e7acd8",
+        "#ffe6a8",
+        "#ffffff",
+        "#d9b3e5"
     ];
+
 
     for (let i = 0; i < amount; i++) {
 
-        const p = document.createElement("div");
+        const p =
+            document.createElement("div");
+
 
         p.className = "particle";
 
-        p.innerHTML = "■";
 
-        p.style.color =
+        /* small paper square */
+
+        p.style.width =
+            (5 + Math.random() * 6) + "px";
+
+
+        p.style.height =
+            (7 + Math.random() * 7) + "px";
+
+
+        p.style.background =
             colors[
                 Math.floor(
                     Math.random() * colors.length
                 )
             ];
 
-        p.style.fontSize =
-            (7 + Math.random() * 8) + "px";
+
+        p.style.borderRadius =
+            Math.random() > 0.5
+                ? "2px"
+                : "0";
+
 
         p.style.left = x + "px";
         p.style.top = y + "px";
 
+
         const angle =
             Math.random() * Math.PI * 2;
 
+
         const distance =
-            80 + Math.random() * 260;
+            90 + Math.random() * 280;
+
 
         p.style.setProperty(
             "--x",
             Math.cos(angle) * distance + "px"
         );
 
+
         p.style.setProperty(
             "--y",
             Math.sin(angle) * distance + "px"
         );
 
+
         document.body.appendChild(p);
 
+
         setTimeout(function() {
+
             p.remove();
-        }, 1300);
+
+        }, 1500);
+
     }
+
 }
 
 
-/* =====================================================
-   BALLOON POP
-===================================================== */
+/* =========================================================
+   BALLOONS
+========================================================= */
 
 const balloonMessages = {
 
@@ -2121,6 +2636,7 @@ const balloonMessages = {
 
     4:
         "Here is to many more beautiful memories together."
+
 };
 
 
@@ -2129,32 +2645,47 @@ let poppedBalloons = 0;
 
 function popBalloon(balloon, number) {
 
-    if (balloon.classList.contains("popped")) {
+    if (
+        balloon.classList.contains("popped")
+    ) {
         return;
     }
 
+
+    /* POP */
+
     balloon.classList.add("popped");
+
 
     poppedBalloons++;
 
 
-    /* confetti exactly when balloon pops */
+    /* Find balloon position */
 
     const rect =
         balloon.getBoundingClientRect();
 
+
+    /* Paper pieces */
+
     createConfetti(
         rect.left + rect.width / 2,
         rect.top + rect.height / 2,
-        22
+        28
     );
 
 
+    /* Message */
+
     const message =
-        document.getElementById("balloonMessage");
+        document.getElementById(
+            "balloonMessage"
+        );
+
 
     message.innerHTML =
         balloonMessages[number];
+
 
     message.classList.remove("show");
 
@@ -2163,26 +2694,34 @@ function popBalloon(balloon, number) {
     message.classList.add("show");
 
 
-    /* all balloons popped */
+    /* All popped */
 
     if (poppedBalloons === 4) {
 
         setTimeout(function() {
 
             const next =
-                document.getElementById("balloonNext");
+                document.getElementById(
+                    "balloonNext"
+                );
+
 
             next.style.opacity = "1";
-            next.style.pointerEvents = "auto";
 
-        }, 600);
+            next.style.pointerEvents =
+                "auto";
+
+
+        }, 700);
+
     }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    ENVELOPE
-===================================================== */
+========================================================= */
 
 let envelopeOpened = false;
 
@@ -2193,35 +2732,48 @@ function openEnvelope() {
         return;
     }
 
+
     envelopeOpened = true;
 
+
     const envelope =
-        document.getElementById("envelope");
+        document.getElementById(
+            "envelope"
+        );
+
 
     envelope.classList.add("open");
 
 
-    /* tiny paper/confetti effect */
+    /* Little paper pieces */
 
     const rect =
         envelope.getBoundingClientRect();
 
+
     createConfetti(
         rect.left + rect.width / 2,
-        rect.top + 30,
-        18
+        rect.top + 20,
+        22
     );
 
 
     setTimeout(function() {
 
         const next =
-            document.getElementById("letterNext");
+            document.getElementById(
+                "letterNext"
+            );
+
 
         next.style.opacity = "1";
-        next.style.pointerEvents = "auto";
 
-    }, 850);
+        next.style.pointerEvents =
+            "auto";
+
+
+    }, 900);
+
 }
 
 </script>
@@ -2231,17 +2783,30 @@ function openEnvelope() {
 """
 
 
-# ---------------------------------------------------------
+# =========================================================
 # INSERT PHOTOS
-# ---------------------------------------------------------
-html = html.replace("__PHOTO1__", photo1)
-html = html.replace("__PHOTO2__", photo2)
-html = html.replace("__PHOTO3__", photo3)
+# =========================================================
+
+html = html.replace(
+    "__PHOTO1__",
+    photo1
+)
+
+html = html.replace(
+    "__PHOTO2__",
+    photo2
+)
+
+html = html.replace(
+    "__PHOTO3__",
+    photo3
+)
 
 
-# ---------------------------------------------------------
-# SHOW APP
-# ---------------------------------------------------------
+# =========================================================
+# DISPLAY
+# =========================================================
+
 components.html(
     html,
     height=850,
