@@ -472,13 +472,14 @@ body {
 
 
 /* =========================================================
-   PAGE 2 - PROPER ANIMATED TREE
+   PAGE 2 - NEW TREE
 ========================================================= */
 
 .tree-wrapper {
+
     position: relative;
 
-    width: 370px;
+    width: 390px;
     height: 420px;
 
     display: flex;
@@ -487,140 +488,665 @@ body {
 
     justify-content: center;
 
-    margin-top: -8px;
+    margin-top: -12px;
+
 }
 
 
-/* Tree SVG */
+/* ---------------------------------------------------------
+   TREE BODY
+--------------------------------------------------------- */
 
-.tree-svg {
+.love-tree {
+
+    position: relative;
+
     width: 350px;
     height: 410px;
 
-    overflow: visible;
 }
 
 
-/* Ground */
+/* ---------------------------------------------------------
+   GROUND
+--------------------------------------------------------- */
 
 .tree-ground {
-    opacity: 0;
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 12px;
+
+    width: 190px;
+    height: 17px;
+
+    transform:
+        translateX(-50%)
+        scaleX(0);
+
+    border-radius: 50%;
+
+    background: rgba(35, 8, 30, 0.45);
 
     animation:
-        groundAppear 0.8s 0.4s forwards;
+        groundGrow
+        0.7s
+        0.2s
+        ease-out
+        forwards;
+
 }
 
-@keyframes groundAppear {
-
-    from {
-        opacity: 0;
-        transform: scaleX(0.3);
-    }
+@keyframes groundGrow {
 
     to {
-        opacity: 1;
-        transform: scaleX(1);
+        transform:
+            translateX(-50%)
+            scaleX(1);
     }
+
 }
 
 
-/* Main trunk */
+/* ---------------------------------------------------------
+   MAIN TRUNK
+--------------------------------------------------------- */
 
-.trunk {
-    stroke-dasharray: 330;
-    stroke-dashoffset: 330;
+.tree-trunk {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 25px;
+
+    width: 25px;
+
+    height: 245px;
+
+    transform:
+        translateX(-50%)
+        scaleY(0);
+
+    transform-origin: bottom center;
+
+    border-radius: 18px 18px 10px 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #48162b 0%,
+            #742d43 35%,
+            #8c4053 52%,
+            #5c2038 75%,
+            #391126 100%
+        );
+
+    box-shadow:
+        3px 5px 12px rgba(0,0,0,0.3);
 
     animation:
-        treeGrow 1.7s 0.2s ease-out forwards;
+        trunkGrow
+        1.7s
+        0.3s
+        cubic-bezier(.2,.8,.3,1)
+        forwards;
+
 }
 
-@keyframes treeGrow {
 
-    to {
-        stroke-dashoffset: 0;
+@keyframes trunkGrow {
+
+    0% {
+        transform:
+            translateX(-50%)
+            scaleY(0);
     }
+
+    80% {
+        transform:
+            translateX(-50%)
+            scaleY(1.04);
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            scaleY(1);
+    }
+
 }
 
 
-/* Branches */
+/* ---------------------------------------------------------
+   BRANCHES
+--------------------------------------------------------- */
 
 .branch {
-    stroke-dasharray: 150;
-    stroke-dashoffset: 150;
 
-    animation:
-        branchGrow 0.8s ease-out forwards;
-}
+    position: absolute;
 
-.branch.b1 {
-    animation-delay: 1.35s;
-}
+    height: 13px;
 
-.branch.b2 {
-    animation-delay: 1.55s;
-}
+    border-radius: 20px;
 
-.branch.b3 {
-    animation-delay: 1.75s;
-}
+    background:
+        linear-gradient(
+            90deg,
+            #3c1228,
+            #6d2941,
+            #46152e
+        );
 
-.branch.b4 {
-    animation-delay: 1.95s;
-}
+    transform-origin: left center;
 
-.branch.b5 {
-    animation-delay: 2.15s;
-}
+    transform:
+        scaleX(0);
 
-@keyframes branchGrow {
-
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-
-/* Heart leaves */
-
-.tree-leaf {
     opacity: 0;
 
-    transform-box: fill-box;
-
-    transform-origin: center;
-
-    animation:
-        leafPop 0.55s ease-out forwards;
 }
 
-.tree-leaf.l1 { animation-delay: 2.05s; }
-.tree-leaf.l2 { animation-delay: 2.18s; }
-.tree-leaf.l3 { animation-delay: 2.31s; }
-.tree-leaf.l4 { animation-delay: 2.44s; }
-.tree-leaf.l5 { animation-delay: 2.57s; }
-.tree-leaf.l6 { animation-delay: 2.70s; }
-.tree-leaf.l7 { animation-delay: 2.83s; }
-.tree-leaf.l8 { animation-delay: 2.96s; }
-.tree-leaf.l9 { animation-delay: 3.09s; }
-.tree-leaf.l10 { animation-delay: 3.22s; }
-.tree-leaf.l11 { animation-delay: 3.35s; }
-.tree-leaf.l12 { animation-delay: 3.48s; }
 
-@keyframes leafPop {
+/* left lower branch */
+
+.branch-1 {
+
+    width: 115px;
+
+    left: 50%;
+
+    bottom: 125px;
+
+    transform:
+        rotate(-38deg)
+        scaleX(0);
+
+    animation:
+        branchLeft
+        0.85s
+        1.45s
+        ease-out
+        forwards;
+
+}
+
+
+/* right lower branch */
+
+.branch-2 {
+
+    width: 112px;
+
+    left: 50%;
+
+    bottom: 145px;
+
+    transform:
+        rotate(-325deg)
+        scaleX(0);
+
+    animation:
+        branchRight
+        0.85s
+        1.65s
+        ease-out
+        forwards;
+
+}
+
+
+/* left upper */
+
+.branch-3 {
+
+    width: 100px;
+
+    left: 50%;
+
+    bottom: 185px;
+
+    transform:
+        rotate(-145deg)
+        scaleX(0);
+
+    animation:
+        branchLeftUp
+        0.75s
+        1.85s
+        ease-out
+        forwards;
+
+}
+
+
+/* right upper */
+
+.branch-4 {
+
+    width: 105px;
+
+    left: 50%;
+
+    bottom: 205px;
+
+    transform:
+        rotate(-35deg)
+        scaleX(0);
+
+    animation:
+        branchRightUp
+        0.75s
+        2.0s
+        ease-out
+        forwards;
+
+}
+
+
+/* top branch */
+
+.branch-5 {
+
+    width: 82px;
+
+    left: 50%;
+
+    bottom: 245px;
+
+    transform:
+        rotate(-140deg)
+        scaleX(0);
+
+    animation:
+        branchTop
+        0.7s
+        2.15s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes branchLeft {
+
+    0% {
+        opacity: 0;
+        transform:
+            rotate(-38deg)
+            scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            rotate(-38deg)
+            scaleX(1);
+    }
+
+}
+
+@keyframes branchRight {
+
+    0% {
+        opacity: 0;
+        transform:
+            rotate(-325deg)
+            scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            rotate(-325deg)
+            scaleX(1);
+    }
+
+}
+
+@keyframes branchLeftUp {
+
+    0% {
+        opacity: 0;
+        transform:
+            rotate(-145deg)
+            scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            rotate(-145deg)
+            scaleX(1);
+    }
+
+}
+
+@keyframes branchRightUp {
+
+    0% {
+        opacity: 0;
+        transform:
+            rotate(-35deg)
+            scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            rotate(-35deg)
+            scaleX(1);
+    }
+
+}
+
+@keyframes branchTop {
+
+    0% {
+        opacity: 0;
+        transform:
+            rotate(-140deg)
+            scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            rotate(-140deg)
+            scaleX(1);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   HEART LEAVES
+--------------------------------------------------------- */
+
+.heart-leaf {
+
+    position: absolute;
+
+    color: #f39ac1;
+
+    font-family: Arial, sans-serif;
+
+    line-height: 1;
+
+    opacity: 0;
+
+    transform:
+        translateY(15px)
+        scale(0);
+
+    text-shadow:
+        0 2px 8px rgba(255,150,200,0.35);
+
+    animation:
+        heartLeafGrow
+        0.65s
+        ease-out
+        forwards;
+
+}
+
+
+/* different pink shades */
+
+.h1,
+.h4,
+.h8,
+.h13,
+.h18,
+.h23 {
+
+    color: #f7afd0;
+
+}
+
+.h2,
+.h6,
+.h10,
+.h15,
+.h20,
+.h25 {
+
+    color: #ed8fba;
+
+}
+
+.h3,
+.h7,
+.h12,
+.h17,
+.h22,
+.h27 {
+
+    color: #f6a2c7;
+
+}
+
+
+/* heart positions */
+
+.h1 {
+    left: 43px;
+    top: 145px;
+    font-size: 31px;
+    animation-delay: 2.05s;
+}
+
+.h2 {
+    left: 70px;
+    top: 118px;
+    font-size: 24px;
+    animation-delay: 2.18s;
+}
+
+.h3 {
+    left: 92px;
+    top: 92px;
+    font-size: 29px;
+    animation-delay: 2.31s;
+}
+
+.h4 {
+    left: 128px;
+    top: 65px;
+    font-size: 25px;
+    animation-delay: 2.44s;
+}
+
+.h5 {
+    left: 161px;
+    top: 78px;
+    font-size: 34px;
+    animation-delay: 2.57s;
+}
+
+.h6 {
+    left: 195px;
+    top: 63px;
+    font-size: 24px;
+    animation-delay: 2.70s;
+}
+
+.h7 {
+    left: 225px;
+    top: 91px;
+    font-size: 30px;
+    animation-delay: 2.83s;
+}
+
+.h8 {
+    left: 251px;
+    top: 118px;
+    font-size: 25px;
+    animation-delay: 2.96s;
+}
+
+.h9 {
+    left: 273px;
+    top: 148px;
+    font-size: 31px;
+    animation-delay: 3.09s;
+}
+
+.h10 {
+    left: 66px;
+    top: 158px;
+    font-size: 25px;
+    animation-delay: 3.22s;
+}
+
+.h11 {
+    left: 95px;
+    top: 137px;
+    font-size: 22px;
+    animation-delay: 3.35s;
+}
+
+.h12 {
+    left: 122px;
+    top: 119px;
+    font-size: 31px;
+    animation-delay: 3.48s;
+}
+
+.h13 {
+    left: 151px;
+    top: 106px;
+    font-size: 23px;
+    animation-delay: 3.61s;
+}
+
+.h14 {
+    left: 180px;
+    top: 111px;
+    font-size: 29px;
+    animation-delay: 3.74s;
+}
+
+.h15 {
+    left: 207px;
+    top: 126px;
+    font-size: 22px;
+    animation-delay: 3.87s;
+}
+
+.h16 {
+    left: 234px;
+    top: 143px;
+    font-size: 29px;
+    animation-delay: 4.00s;
+}
+
+.h17 {
+    left: 82px;
+    top: 184px;
+    font-size: 28px;
+    animation-delay: 4.13s;
+}
+
+.h18 {
+    left: 111px;
+    top: 169px;
+    font-size: 23px;
+    animation-delay: 4.26s;
+}
+
+.h19 {
+    left: 139px;
+    top: 153px;
+    font-size: 30px;
+    animation-delay: 4.39s;
+}
+
+.h20 {
+    left: 168px;
+    top: 145px;
+    font-size: 23px;
+    animation-delay: 4.52s;
+}
+
+.h21 {
+    left: 196px;
+    top: 155px;
+    font-size: 31px;
+    animation-delay: 4.65s;
+}
+
+.h22 {
+    left: 223px;
+    top: 170px;
+    font-size: 23px;
+    animation-delay: 4.78s;
+}
+
+.h23 {
+    left: 250px;
+    top: 185px;
+    font-size: 28px;
+    animation-delay: 4.91s;
+}
+
+.h24 {
+    left: 106px;
+    top: 205px;
+    font-size: 25px;
+    animation-delay: 5.04s;
+}
+
+.h25 {
+    left: 134px;
+    top: 194px;
+    font-size: 22px;
+    animation-delay: 5.17s;
+}
+
+.h26 {
+    left: 164px;
+    top: 190px;
+    font-size: 29px;
+    animation-delay: 5.30s;
+}
+
+.h27 {
+    left: 194px;
+    top: 198px;
+    font-size: 24px;
+    animation-delay: 5.43s;
+}
+
+.h28 {
+    left: 220px;
+    top: 208px;
+    font-size: 28px;
+    animation-delay: 5.56s;
+}
+
+
+/* heart animation */
+
+@keyframes heartLeafGrow {
 
     0% {
         opacity: 0;
 
         transform:
+            translateY(18px)
             scale(0)
-            rotate(-25deg);
+            rotate(-20deg);
     }
 
-    65% {
+    55% {
         opacity: 1;
 
         transform:
-            scale(1.12)
+            translateY(-3px)
+            scale(1.18)
             rotate(7deg);
     }
 
@@ -628,26 +1154,115 @@ body {
         opacity: 1;
 
         transform:
+            translateY(0)
             scale(1)
             rotate(0deg);
     }
+
 }
 
 
-/* little leaf shine */
+/* gentle floating after appearing */
 
-.leaf-shine {
+.heart-leaf {
+
+    animation-name:
+        heartLeafGrow,
+        tinyHeartFloat;
+
+    animation-duration:
+        0.65s,
+        2.7s;
+
+    animation-timing-function:
+        ease-out,
+        ease-in-out;
+
+    animation-iteration-count:
+        1,
+        infinite;
+
+    animation-fill-mode:
+        forwards,
+        both;
+
+}
+
+
+/* ---------------------------------------------------------
+   LITTLE HEART HIGHLIGHTS
+--------------------------------------------------------- */
+
+.tree-spark {
+
+    position: absolute;
+
+    color: #fff2f8;
+
+    font-family: Arial, sans-serif;
+
     opacity: 0;
 
     animation:
-        shineAppear 0.5s 3.6s forwards;
+        sparkAppear
+        0.5s
+        5.3s
+        forwards;
+
 }
 
-@keyframes shineAppear {
+.spark1 {
+    left: 51px;
+    top: 102px;
+    font-size: 10px;
+}
+
+.spark2 {
+    right: 53px;
+    top: 125px;
+    font-size: 8px;
+}
+
+.spark3 {
+    left: 91px;
+    top: 74px;
+    font-size: 7px;
+}
+
+.spark4 {
+    right: 88px;
+    top: 85px;
+    font-size: 10px;
+}
+
+
+@keyframes sparkAppear {
 
     to {
-        opacity: 0.35;
+        opacity: 0.8;
     }
+
+}
+
+
+/* ---------------------------------------------------------
+   FLOATING MOTION
+--------------------------------------------------------- */
+
+@keyframes tinyHeartFloat {
+
+    0% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -3px;
+    }
+
+    100% {
+        margin-top: 0;
+    }
+
 }
 
 
@@ -1648,6 +2263,7 @@ body {
     .final-name {
         font-size: 32px;
     }
+
 }
 
 </style>
@@ -1725,215 +2341,78 @@ body {
         id="page2">
 
         <div class="small-title">
-            Something special is growing...
+            First things first
         </div>
 
 
         <div class="tree-wrapper">
 
-            <svg
-                class="tree-svg"
-                viewBox="0 0 350 410"
-                xmlns="http://www.w3.org/2000/svg">
+            <div class="love-tree">
 
 
-                <!-- Ground -->
+                <!-- GROUND -->
 
-                <ellipse
-                    class="tree-ground"
-                    cx="175"
-                    cy="385"
-                    rx="100"
-                    ry="13"
-                    fill="#250d24"
-                />
+                <div class="tree-ground"></div>
 
 
-                <!-- Main trunk -->
+                <!-- MAIN TRUNK -->
 
-                <path
-                    class="trunk"
-                    d="
-                    M175 375
-                    C174 330 176 285 174 240
-                    C173 205 176 170 175 135
-                    "
-                    fill="none"
-                    stroke="#672b3d"
-                    stroke-width="18"
-                    stroke-linecap="round"
-                />
+                <div class="tree-trunk"></div>
 
 
-                <!-- Main branches -->
+                <!-- BRANCHES -->
 
-                <path
-                    class="branch b1"
-                    d="M174 245 C145 215 122 190 96 158"
-                    fill="none"
-                    stroke="#672b3d"
-                    stroke-width="10"
-                    stroke-linecap="round"
-                />
+                <div class="branch branch-1"></div>
 
-                <path
-                    class="branch b2"
-                    d="M175 220 C204 194 226 168 250 135"
-                    fill="none"
-                    stroke="#672b3d"
-                    stroke-width="10"
-                    stroke-linecap="round"
-                />
+                <div class="branch branch-2"></div>
 
-                <path
-                    class="branch b3"
-                    d="M175 190 C145 164 126 140 116 110"
-                    fill="none"
-                    stroke="#672b3d"
-                    stroke-width="9"
-                    stroke-linecap="round"
-                />
+                <div class="branch branch-3"></div>
 
-                <path
-                    class="branch b4"
-                    d="M176 175 C204 150 220 125 225 94"
-                    fill="none"
-                    stroke="#672b3d"
-                    stroke-width="9"
-                    stroke-linecap="round"
-                />
+                <div class="branch branch-4"></div>
 
-                <path
-                    class="branch b5"
-                    d="M174 150 C158 128 151 104 151 78"
-                    fill="none"
-                    stroke="#672b3d"
-                    stroke-width="8"
-                    stroke-linecap="round"
-                />
+                <div class="branch branch-5"></div>
 
 
-                <!-- HEART LEAVES -->
+                <!-- MANY HEART LEAVES -->
 
-                <g class="tree-leaf l1" transform="translate(78 132)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f39ac2"/>
-                </g>
-
-
-                <g class="tree-leaf l2" transform="translate(112 99)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f39ac2"/>
-                </g>
-
-
-                <g class="tree-leaf l3" transform="translate(151 65)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f7a7c9"/>
-                </g>
-
-
-                <g class="tree-leaf l4" transform="translate(188 82)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f29bc2"/>
-                </g>
+                <span class="heart-leaf h1">♥</span>
+                <span class="heart-leaf h2">♥</span>
+                <span class="heart-leaf h3">♥</span>
+                <span class="heart-leaf h4">♥</span>
+                <span class="heart-leaf h5">♥</span>
+                <span class="heart-leaf h6">♥</span>
+                <span class="heart-leaf h7">♥</span>
+                <span class="heart-leaf h8">♥</span>
+                <span class="heart-leaf h9">♥</span>
+                <span class="heart-leaf h10">♥</span>
+                <span class="heart-leaf h11">♥</span>
+                <span class="heart-leaf h12">♥</span>
+                <span class="heart-leaf h13">♥</span>
+                <span class="heart-leaf h14">♥</span>
+                <span class="heart-leaf h15">♥</span>
+                <span class="heart-leaf h16">♥</span>
+                <span class="heart-leaf h17">♥</span>
+                <span class="heart-leaf h18">♥</span>
+                <span class="heart-leaf h19">♥</span>
+                <span class="heart-leaf h20">♥</span>
+                <span class="heart-leaf h21">♥</span>
+                <span class="heart-leaf h22">♥</span>
+                <span class="heart-leaf h23">♥</span>
+                <span class="heart-leaf h24">♥</span>
+                <span class="heart-leaf h25">♥</span>
+                <span class="heart-leaf h26">♥</span>
+                <span class="heart-leaf h27">♥</span>
+                <span class="heart-leaf h28">♥</span>
 
 
-                <g class="tree-leaf l5" transform="translate(222 105)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f6a7ca"/>
-                </g>
+                <!-- SMALL SPARKLES -->
 
+                <span class="tree-spark spark1">♥</span>
+                <span class="tree-spark spark2">♥</span>
+                <span class="tree-spark spark3">♥</span>
+                <span class="tree-spark spark4">♥</span>
 
-                <g class="tree-leaf l6" transform="translate(246 126)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f39bc3"/>
-                </g>
-
-
-                <g class="tree-leaf l7" transform="translate(106 155)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#ef8fba"/>
-                </g>
-
-
-                <g class="tree-leaf l8" transform="translate(143 137)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f6a2c7"/>
-                </g>
-
-
-                <g class="tree-leaf l9" transform="translate(181 125)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f39ac1"/>
-                </g>
-
-
-                <g class="tree-leaf l10" transform="translate(216 151)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f7a7cb"/>
-                </g>
-
-
-                <g class="tree-leaf l11" transform="translate(132 188)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f39ac1"/>
-                </g>
-
-
-                <g class="tree-leaf l12" transform="translate(204 183)">
-                    <path
-                        d="M0 10
-                           C-18 -7 -30 17 0 38
-                           C30 17 18 -7 0 10Z"
-                        fill="#f49fc5"/>
-                </g>
-
-
-                <!-- small shine -->
-
-                <circle
-                    class="leaf-shine"
-                    cx="106"
-                    cy="125"
-                    r="4"
-                    fill="white"
-                />
-
-            </svg>
+            </div>
 
         </div>
 
@@ -1974,8 +2453,6 @@ body {
             <div class="plate"></div>
 
 
-            <!-- 3 LAYERS -->
-
             <div
                 class="cake-layer layer3">
             </div>
@@ -1991,8 +2468,6 @@ body {
             </div>
 
 
-            <!-- CREAM -->
-
             <div
                 class="cream cream1">
             </div>
@@ -2006,21 +2481,15 @@ body {
             </div>
 
 
-            <!-- CANDLE -->
-
             <div
                 class="candle">
             </div>
 
 
-            <!-- FLAME -->
-
             <div
                 class="flame">
             </div>
 
-
-            <!-- MESSAGE -->
 
             <div
                 class="cake-message"
@@ -2191,8 +2660,6 @@ body {
         </div>
 
 
-        <!-- CENTER -->
-
         <div
             class="envelope-wrap"
             id="envelopeWrap">
@@ -2341,7 +2808,7 @@ function showPage(number) {
     if (number === 2) {
 
         const tree =
-            document.querySelector(".tree-svg");
+            document.querySelector(".love-tree");
 
         tree.style.display = "none";
 
@@ -2350,6 +2817,7 @@ function showPage(number) {
             tree.style.display = "block";
 
         }, 20);
+
     }
 
 
@@ -2375,8 +2843,6 @@ function showPage(number) {
 
         }, 100);
 
-
-        /* candle finished -> colourful paper pop */
 
         setTimeout(function() {
 
@@ -2557,8 +3023,6 @@ function createConfetti(x, y, amount) {
         p.className = "particle";
 
 
-        /* small paper square */
-
         p.style.width =
             (5 + Math.random() * 6) + "px";
 
@@ -2652,21 +3116,15 @@ function popBalloon(balloon, number) {
     }
 
 
-    /* POP */
-
     balloon.classList.add("popped");
 
 
     poppedBalloons++;
 
 
-    /* Find balloon position */
-
     const rect =
         balloon.getBoundingClientRect();
 
-
-    /* Paper pieces */
 
     createConfetti(
         rect.left + rect.width / 2,
@@ -2674,8 +3132,6 @@ function popBalloon(balloon, number) {
         28
     );
 
-
-    /* Message */
 
     const message =
         document.getElementById(
@@ -2693,8 +3149,6 @@ function popBalloon(balloon, number) {
 
     message.classList.add("show");
 
-
-    /* All popped */
 
     if (poppedBalloons === 4) {
 
@@ -2744,8 +3198,6 @@ function openEnvelope() {
 
     envelope.classList.add("open");
 
-
-    /* Little paper pieces */
 
     const rect =
         envelope.getBoundingClientRect();
