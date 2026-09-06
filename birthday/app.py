@@ -218,8 +218,6 @@ body {
 }
 
 
-/* heart shape */
-
 .start-heart {
     position: absolute;
 
@@ -417,14 +415,14 @@ body {
 
 
 /* =====================================================
-   PAGE 2 - TREE
+   PAGE 2 - NEW TREE
 ===================================================== */
 
 .tree-area {
     position: relative;
 
-    width: 330px;
-    height: 390px;
+    width: 360px;
+    height: 430px;
 
     margin-top: -5px;
 }
@@ -435,195 +433,404 @@ body {
 .tree-ground {
     position: absolute;
 
-    width: 190px;
-    height: 12px;
+    width: 215px;
+    height: 15px;
 
-    left: 70px;
-    bottom: 28px;
+    left: 72px;
+    bottom: 24px;
 
-    background: rgba(20,5,20,0.25);
+    background: rgba(15,3,15,0.28);
 
     border-radius: 50%;
+
+    filter: blur(1px);
 }
 
 
-/* trunk */
+/* -----------------------------------------------------
+   MAIN TRUNK
+----------------------------------------------------- */
 
 .tree-trunk {
     position: absolute;
 
-    width: 19px;
-    height: 245px;
+    width: 20px;
+    height: 270px;
 
-    left: 156px;
-    bottom: 35px;
+    left: 170px;
+    bottom: 34px;
 
-    background: linear-gradient(
-        90deg,
-        #542030,
-        #793146,
-        #542030
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #4d1c2c 0%,
+            #6c293d 35%,
+            #81364d 55%,
+            #572031 100%
+        );
 
-    border-radius: 10px;
+    border-radius: 12px;
 
-    box-shadow:
-        inset 3px 0 rgba(255,255,255,0.08);
+    transform-origin: bottom center;
 
     z-index: 2;
+
+    animation: treeGrow 1.4s ease-out forwards;
+}
+
+@keyframes treeGrow {
+
+    0% {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
 }
 
 
-/* branches */
+/* -----------------------------------------------------
+   BRANCHES
+----------------------------------------------------- */
 
-.branch {
+.tree-branch {
     position: absolute;
 
-    height: 12px;
+    height: 11px;
 
-    background: #60263b;
+    background:
+        linear-gradient(
+            90deg,
+            #552031,
+            #713047,
+            #5a2336
+        );
 
     border-radius: 12px;
 
     transform-origin: left center;
 
     z-index: 1;
+
+    opacity: 0;
+
+    animation:
+        branchGrow 0.9s ease-out forwards;
 }
 
-.branch1 {
+.branch-a {
+    width: 135px;
+    left: 174px;
+    bottom: 220px;
+    transform: rotate(-34deg);
+    animation-delay: 0.9s;
+}
+
+.branch-b {
     width: 125px;
-
-    left: 162px;
-    bottom: 210px;
-
-    transform: rotate(-35deg);
+    left: 170px;
+    bottom: 180px;
+    transform: rotate(34deg);
+    animation-delay: 1.15s;
 }
 
-.branch2 {
-    width: 120px;
-
-    left: 158px;
-    bottom: 175px;
-
-    transform: rotate(31deg);
+.branch-c {
+    width: 128px;
+    left: 169px;
+    bottom: 145px;
+    transform: rotate(-38deg);
+    animation-delay: 1.4s;
 }
 
-.branch3 {
-    width: 115px;
-
-    left: 156px;
-    bottom: 135px;
-
-    transform: rotate(-40deg);
-}
-
-.branch4 {
-    width: 100px;
-
-    left: 157px;
+.branch-d {
+    width: 112px;
+    left: 170px;
     bottom: 110px;
+    transform: rotate(36deg);
+    animation-delay: 1.65s;
+}
 
-    transform: rotate(35deg);
+.branch-e {
+    width: 95px;
+    left: 171px;
+    bottom: 255px;
+    transform: rotate(24deg);
+    animation-delay: 1.9s;
+}
+
+@keyframes branchGrow {
+
+    0% {
+        transform:
+            rotate(var(--angle))
+            scaleX(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform:
+            rotate(var(--angle))
+            scaleX(1);
+        opacity: 1;
+    }
 }
 
 
-/* little branches */
+/* -----------------------------------------------------
+   SMALL TWIGS
+----------------------------------------------------- */
 
-.branch1:after,
-.branch2:after,
-.branch3:after,
-.branch4:after {
-    content: "";
-
+.twig {
     position: absolute;
 
-    width: 60px;
-    height: 7px;
+    width: 65px;
+    height: 6px;
 
     background: #60263b;
 
     border-radius: 8px;
 
-    top: 0;
+    transform-origin: left center;
+
+    z-index: 1;
+
+    opacity: 0;
+
+    animation: twigAppear 0.7s ease-out forwards;
 }
 
-.branch1:after {
-    right: 15px;
-    transform: rotate(35deg);
+.twig1 {
+    left: 248px;
+    bottom: 245px;
+    transform: rotate(-55deg);
+    animation-delay: 2.0s;
 }
 
-.branch2:after {
-    right: 10px;
-    transform: rotate(-40deg);
+.twig2 {
+    left: 245px;
+    bottom: 205px;
+    transform: rotate(55deg);
+    animation-delay: 2.15s;
 }
 
-.branch3:after {
-    right: 5px;
-    transform: rotate(35deg);
+.twig3 {
+    left: 245px;
+    bottom: 165px;
+    transform: rotate(-58deg);
+    animation-delay: 2.3s;
 }
 
-.branch4:after {
-    right: 0;
-    transform: rotate(-35deg);
+.twig4 {
+    left: 240px;
+    bottom: 128px;
+    transform: rotate(55deg);
+    animation-delay: 2.45s;
+}
+
+.twig5 {
+    left: 108px;
+    bottom: 235px;
+    transform: rotate(38deg);
+    animation-delay: 2.1s;
+}
+
+.twig6 {
+    left: 105px;
+    bottom: 195px;
+    transform: rotate(-48deg);
+    animation-delay: 2.25s;
+}
+
+.twig7 {
+    left: 112px;
+    bottom: 155px;
+    transform: rotate(45deg);
+    animation-delay: 2.4s;
+}
+
+@keyframes twigAppear {
+
+    0% {
+        transform:
+            rotate(0deg)
+            scaleX(0);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 
-/* heart leaves */
+/* -----------------------------------------------------
+   HEART LEAVES
+----------------------------------------------------- */
 
-.leaf {
+.tree-heart {
     position: absolute;
 
-    width: 37px;
-    height: 37px;
+    width: 27px;
+    height: 27px;
 
-    background: #f59bc2;
+    background: #f39bc2;
 
-    transform: rotate(-45deg);
+    transform: rotate(-45deg) scale(0);
 
-    border-radius: 8px;
+    border-radius: 6px;
 
     z-index: 5;
 
+    opacity: 0;
+
     filter:
-        drop-shadow(0 3px 4px rgba(0,0,0,0.15));
+        drop-shadow(
+            0 3px 5px rgba(0,0,0,0.20)
+        );
+
+    animation:
+        heartLeafAppear 0.55s
+        cubic-bezier(.17,.89,.32,1.49)
+        forwards;
 }
 
-.leaf:before,
-.leaf:after {
+.tree-heart:before,
+.tree-heart:after {
     content: "";
 
     position: absolute;
 
-    width: 37px;
-    height: 37px;
+    width: 27px;
+    height: 27px;
 
-    background: #f59bc2;
+    background: #f39bc2;
 
     border-radius: 50%;
 }
 
-.leaf:before {
-    top: -18px;
+.tree-heart:before {
+    top: -13px;
     left: 0;
 }
 
-.leaf:after {
-    left: 18px;
+.tree-heart:after {
     top: 0;
+    left: 13px;
+}
+
+@keyframes heartLeafAppear {
+
+    0% {
+        opacity: 0;
+        transform:
+            rotate(-45deg)
+            scale(0);
+    }
+
+    70% {
+        opacity: 1;
+        transform:
+            rotate(-45deg)
+            scale(1.18);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            rotate(-45deg)
+            scale(1);
+    }
 }
 
 
-/* leaf positions */
+/* many heart positions */
 
-.l1 { left: 115px; top: 65px; }
-.l2 { left: 160px; top: 78px; }
-.l3 { left: 205px; top: 66px; }
-.l4 { left: 91px; top: 115px; }
-.l5 { left: 143px; top: 120px; }
-.l6 { left: 197px; top: 112px; }
-.l7 { left: 115px; top: 160px; }
-.l8 { left: 170px; top: 157px; }
-.l9 { left: 218px; top: 154px; }
+.h1  { left: 145px; top: 52px;  animation-delay: 2.3s; }
+.h2  { left: 185px; top: 58px;  animation-delay: 2.45s; }
+.h3  { left: 225px; top: 72px;  animation-delay: 2.6s; }
+
+.h4  { left: 118px; top: 82px;  animation-delay: 2.55s; }
+.h5  { left: 158px; top: 91px;  animation-delay: 2.7s; }
+.h6  { left: 205px; top: 98px;  animation-delay: 2.85s; }
+.h7  { left: 245px; top: 105px; animation-delay: 3s; }
+
+.h8  { left: 98px;  top: 120px; animation-delay: 2.8s; }
+.h9  { left: 137px; top: 126px; animation-delay: 2.95s; }
+.h10 { left: 180px; top: 133px; animation-delay: 3.1s; }
+.h11 { left: 225px; top: 140px; animation-delay: 3.25s; }
+.h12 { left: 260px; top: 145px; animation-delay: 3.4s; }
+
+.h13 { left: 112px; top: 165px; animation-delay: 3.15s; }
+.h14 { left: 151px; top: 170px; animation-delay: 3.3s; }
+.h15 { left: 198px; top: 177px; animation-delay: 3.45s; }
+.h16 { left: 239px; top: 180px; animation-delay: 3.6s; }
+
+.h17 { left: 132px; top: 205px; animation-delay: 3.45s; }
+.h18 { left: 175px; top: 210px; animation-delay: 3.6s; }
+.h19 { left: 218px; top: 214px; animation-delay: 3.75s; }
+
+.h20 { left: 150px; top: 242px; animation-delay: 3.65s; }
+.h21 { left: 190px; top: 245px; animation-delay: 3.8s; }
+.h22 { left: 230px; top: 240px; animation-delay: 3.95s; }
+
+
+/* slightly different sizes */
+
+.h2, .h6, .h10, .h15, .h19 {
+    width: 22px;
+    height: 22px;
+}
+
+.h2:before,
+.h2:after,
+.h6:before,
+.h6:after,
+.h10:before,
+.h10:after,
+.h15:before,
+.h15:after,
+.h19:before,
+.h19:after {
+    width: 22px;
+    height: 22px;
+}
+
+.h2:before,
+.h6:before,
+.h10:before,
+.h15:before,
+.h19:before {
+    top: -11px;
+}
+
+.h2:after,
+.h6:after,
+.h10:after,
+.h15:after,
+.h19:after {
+    left: 11px;
+}
+
+
+/* tree title */
+
+.tree-title {
+    font-family: "Delius", cursive;
+
+    font-size: 37px;
+
+    line-height: 1.15;
+
+    margin-top: 5px;
+
+    color: #fff;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,0.25);
+}
 
 
 /* =====================================================
@@ -638,9 +845,6 @@ body {
 
     margin-top: -10px;
 }
-
-
-/* cake plate */
 
 .plate {
     position: absolute;
@@ -658,9 +862,6 @@ body {
     box-shadow:
         0 5px 10px rgba(0,0,0,0.2);
 }
-
-
-/* cake layers */
 
 .cake-layer {
     position: absolute;
@@ -685,41 +886,23 @@ body {
     opacity: 0;
 }
 
-
-/* bottom layer */
-
 .layer3 {
     height: 67px;
-
     bottom: 47px;
-
     width: 230px;
 }
 
-
-/* middle layer */
-
 .layer2 {
     height: 62px;
-
     bottom: 105px;
-
     width: 195px;
 }
 
-
-/* top layer */
-
 .layer1 {
     height: 55px;
-
     bottom: 158px;
-
     width: 155px;
 }
-
-
-/* cream */
 
 .cream {
     position: absolute;
@@ -740,9 +923,6 @@ body {
     z-index: 4;
 }
 
-
-/* positions */
-
 .cream1 {
     bottom: 153px;
 }
@@ -756,9 +936,6 @@ body {
     bottom: 43px;
     width: 220px;
 }
-
-
-/* candle */
 
 .candle {
     position: absolute;
@@ -788,9 +965,6 @@ body {
     z-index: 6;
 }
 
-
-/* flame */
-
 .flame {
     position: absolute;
 
@@ -817,7 +991,7 @@ body {
 }
 
 
-/* cake falling animations */
+/* cake animation */
 
 .cake-area.build .layer3 {
     animation: layerDrop 0.65s 0.2s forwards;
@@ -853,14 +1027,12 @@ body {
         flicker 0.8s 4.15s infinite alternate;
 }
 
-
 @keyframes layerDrop {
 
     0% {
         transform:
             translate(-50%, -280px)
             scale(0.9);
-
         opacity: 0;
     }
 
@@ -868,7 +1040,6 @@ body {
         transform:
             translate(-50%, 10px)
             scale(1.03);
-
         opacity: 1;
     }
 
@@ -876,11 +1047,9 @@ body {
         transform:
             translate(-50%, 0)
             scale(1);
-
         opacity: 1;
     }
 }
-
 
 @keyframes creamAppear {
 
@@ -898,7 +1067,6 @@ body {
             scaleX(1);
     }
 }
-
 
 @keyframes candleDrop {
 
@@ -923,7 +1091,6 @@ body {
     }
 }
 
-
 @keyframes flameDrop {
 
     0% {
@@ -941,8 +1108,8 @@ body {
     }
 }
 
-
 @keyframes flicker {
+
     from {
         transform:
             translateX(-50%)
@@ -958,9 +1125,6 @@ body {
     }
 }
 
-
-/* birthday text */
-
 .cake-message {
     position: absolute;
 
@@ -975,6 +1139,7 @@ body {
     font-family: "Delius", cursive;
 
     font-size: 36px;
+
     line-height: 1.15;
 
     color: white;
@@ -1005,6 +1170,52 @@ body {
 
 
 /* =====================================================
+   CONFETTI
+===================================================== */
+
+.confetti-box {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 2000;
+
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+
+    width: 8px;
+    height: 13px;
+
+    top: -20px;
+
+    opacity: 0;
+
+    animation: confettiFall 2.2s linear forwards;
+}
+
+@keyframes confettiFall {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(105vh)
+            rotate(720deg);
+        opacity: 0.9;
+    }
+}
+
+
+/* =====================================================
    PAGE 4 - BALLOONS
 ===================================================== */
 
@@ -1013,14 +1224,12 @@ body {
     margin-bottom: 25px;
 }
 
-
 .balloon-area {
     width: 360px;
     height: 330px;
 
     position: relative;
 }
-
 
 .balloon {
     position: absolute;
@@ -1042,7 +1251,6 @@ body {
     z-index: 4;
 }
 
-
 .balloon:after {
     content: "";
 
@@ -1056,7 +1264,6 @@ body {
     top: 93px;
     left: 50%;
 }
-
 
 .balloon:before {
     content: "";
@@ -1076,11 +1283,9 @@ body {
     border-top: 10px solid currentColor;
 }
 
-
 .b1 {
     left: 40px;
     top: 45px;
-
     background: #f6a4c7;
     color: #f6a4c7;
 }
@@ -1088,7 +1293,6 @@ body {
 .b2 {
     left: 135px;
     top: 5px;
-
     background: #e9b0df;
     color: #e9b0df;
 }
@@ -1096,7 +1300,6 @@ body {
 .b3 {
     left: 225px;
     top: 48px;
-
     background: #a9c3dc;
     color: #a9c3dc;
 }
@@ -1104,21 +1307,17 @@ body {
 .b4 {
     left: 128px;
     top: 125px;
-
     background: #f3c0dc;
     color: #f3c0dc;
 }
-
 
 .balloon:hover {
     transform: translateY(-5px) scale(1.05);
 }
 
-
 .balloon.popped {
     animation: popBalloon 0.35s forwards;
 }
-
 
 @keyframes popBalloon {
 
@@ -1138,9 +1337,6 @@ body {
     }
 }
 
-
-/* balloon messages */
-
 .balloon-message {
     position: absolute;
 
@@ -1149,7 +1345,9 @@ body {
     left: 50%;
     bottom: 8px;
 
-    transform: translateX(-50%) translateY(20px);
+    transform:
+        translateX(-50%)
+        translateY(20px);
 
     font-size: 22px;
 
@@ -1162,7 +1360,10 @@ body {
 
 .balloon-message.show {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+
+    transform:
+        translateX(-50%)
+        translateY(0);
 }
 
 
@@ -1175,7 +1376,6 @@ body {
     margin-bottom: 25px;
 }
 
-
 .photo-container {
     display: flex;
 
@@ -1187,7 +1387,6 @@ body {
     width: 100%;
     max-width: 900px;
 }
-
 
 .photo-card {
     width: 230px;
@@ -1206,7 +1405,6 @@ body {
     transition: 0.3s;
 }
 
-
 .photo-card:nth-child(2) {
     transform: rotate(2deg);
 }
@@ -1215,13 +1413,11 @@ body {
     transform: rotate(-1deg);
 }
 
-
 .photo-card:hover {
     transform:
         rotate(0deg)
         translateY(-8px);
 }
-
 
 .photo-card img {
     display: block;
@@ -1234,7 +1430,6 @@ body {
 
     border-radius: 2px;
 }
-
 
 .photo-caption {
     color: #562047;
@@ -1255,9 +1450,6 @@ body {
     justify-content: center;
 }
 
-
-/* envelope wrapper */
-
 .envelope-wrap {
     position: relative;
 
@@ -1268,9 +1460,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
-/* envelope */
 
 .envelope {
     position: relative;
@@ -1289,7 +1478,6 @@ body {
 
     transition: 0.6s;
 }
-
 
 .envelope:before {
     content: "";
@@ -1310,9 +1498,6 @@ body {
     transition: 0.7s;
 }
 
-
-/* lower folds */
-
 .envelope:after {
     content: "";
 
@@ -1329,7 +1514,6 @@ body {
 
     z-index: 3;
 }
-
 
 .envelope-letter {
     position: absolute;
@@ -1364,11 +1548,9 @@ body {
     overflow: auto;
 }
 
-
 .envelope.open:before {
     transform: rotateX(180deg);
 }
-
 
 .envelope.open .envelope-letter {
     transform: translateY(-115px);
@@ -1377,7 +1559,6 @@ body {
 
     height: 235px;
 }
-
 
 .letter-title {
     text-align: center;
@@ -1391,7 +1572,6 @@ body {
     color: #7b315c;
 }
 
-
 .from {
     text-align: right;
 
@@ -1401,9 +1581,6 @@ body {
 
     color: #8c3567;
 }
-
-
-/* envelope animation entering from side */
 
 .envelope-wrap.enter {
     animation: envelopeEnter 1.3s ease-out forwards;
@@ -1429,4 +1606,801 @@ body {
 }
 
 
-/* ==================================
+/* =====================================================
+   FINAL PAGE
+===================================================== */
+
+.final-heart {
+    position: relative;
+
+    width: 125px;
+    height: 125px;
+
+    background: #ef7fac;
+
+    transform: rotate(-45deg);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 0 35px rgba(255,140,190,0.55);
+
+    animation: finalHeartBeat 1.2s infinite;
+}
+
+.final-heart:before,
+.final-heart:after {
+    content: "";
+
+    position: absolute;
+
+    width: 125px;
+    height: 125px;
+
+    background: #ef7fac;
+
+    border-radius: 50%;
+}
+
+.final-heart:before {
+    top: -62px;
+    left: 0;
+}
+
+.final-heart:after {
+    left: 62px;
+    top: 0;
+}
+
+@keyframes finalHeartBeat {
+
+    0%, 100% {
+        transform: rotate(-45deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(-45deg) scale(1.08);
+    }
+}
+
+.final-text {
+    font-family: "Delius", cursive;
+
+    font-size: 42px;
+
+    line-height: 1.1;
+
+    margin-top: 55px;
+
+    color: white;
+
+    text-shadow:
+        0 3px 12px rgba(0,0,0,0.25);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .big-title {
+        font-size: 35px;
+    }
+
+    .tree-area {
+        transform: scale(0.88);
+        transform-origin: center;
+        margin-bottom: -35px;
+    }
+
+    .cake-area {
+        transform: scale(0.9);
+        transform-origin: center;
+    }
+
+    .photo-container {
+        transform: scale(0.8);
+        gap: 8px;
+    }
+
+    .photo-card {
+        width: 180px;
+    }
+
+    .photo-card img {
+        height: 190px;
+    }
+
+    .envelope {
+        width: 275px;
+    }
+
+    .final-text {
+        font-size: 34px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <div class="star s1"></div>
+    <div class="star s2"></div>
+    <div class="star s3"></div>
+    <div class="star s4"></div>
+    <div class="star s5"></div>
+    <div class="star s6"></div>
+    <div class="star s7"></div>
+    <div class="star s8"></div>
+    <div class="star s9"></div>
+
+
+    <!-- =================================================
+         PAGE 1
+    ================================================== -->
+
+    <section class="page active" id="page1">
+
+        <div class="small-title">
+            First things first
+        </div>
+
+        <div class="first-heart-area">
+
+            <div class="start-heart" id="startHeart"></div>
+
+            <div class="arrow"></div>
+
+        </div>
+
+        <div class="sub-title">
+            Something special is waiting...
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PAGE 2 - TREE
+    ================================================== -->
+
+    <section class="page" id="page2">
+
+        <div class="small-title">
+            A little tree
+        </div>
+
+        <div class="tree-area">
+
+            <div class="tree-ground"></div>
+
+            <div class="tree-trunk"></div>
+
+            <div class="tree-branch branch-a"></div>
+            <div class="tree-branch branch-b"></div>
+            <div class="tree-branch branch-c"></div>
+            <div class="tree-branch branch-d"></div>
+            <div class="tree-branch branch-e"></div>
+
+            <div class="twig twig1"></div>
+            <div class="twig twig2"></div>
+            <div class="twig twig3"></div>
+            <div class="twig twig4"></div>
+            <div class="twig twig5"></div>
+            <div class="twig twig6"></div>
+            <div class="twig twig7"></div>
+
+
+            <!-- MANY HEART LEAVES -->
+
+            <div class="tree-heart h1"></div>
+            <div class="tree-heart h2"></div>
+            <div class="tree-heart h3"></div>
+            <div class="tree-heart h4"></div>
+            <div class="tree-heart h5"></div>
+            <div class="tree-heart h6"></div>
+            <div class="tree-heart h7"></div>
+            <div class="tree-heart h8"></div>
+            <div class="tree-heart h9"></div>
+            <div class="tree-heart h10"></div>
+            <div class="tree-heart h11"></div>
+            <div class="tree-heart h12"></div>
+            <div class="tree-heart h13"></div>
+            <div class="tree-heart h14"></div>
+            <div class="tree-heart h15"></div>
+            <div class="tree-heart h16"></div>
+            <div class="tree-heart h17"></div>
+            <div class="tree-heart h18"></div>
+            <div class="tree-heart h19"></div>
+            <div class="tree-heart h20"></div>
+            <div class="tree-heart h21"></div>
+            <div class="tree-heart h22"></div>
+
+        </div>
+
+        <div class="tree-title">
+            A little tree<br>
+            full of love
+        </div>
+
+        <button class="next-btn" onclick="goToPage(3)">
+            Next
+        </button>
+
+    </section>
+
+
+    <!-- =================================================
+         PAGE 3 - CAKE
+    ================================================== -->
+
+    <section class="page" id="page3">
+
+        <div class="small-title">
+            Something special is coming...
+        </div>
+
+        <div class="cake-area" id="cakeArea">
+
+            <div class="plate"></div>
+
+            <div class="cake-layer layer3"></div>
+
+            <div class="cake-layer layer2"></div>
+
+            <div class="cake-layer layer1"></div>
+
+            <div class="cream cream1"></div>
+            <div class="cream cream2"></div>
+            <div class="cream cream3"></div>
+
+            <div class="candle"></div>
+
+            <div class="flame"></div>
+
+            <div class="cake-message">
+                HAPPY BIRTHDAY<br>
+                RICKY
+            </div>
+
+        </div>
+
+        <button class="next-btn" onclick="goToPage(4)">
+            Continue
+        </button>
+
+    </section>
+
+
+    <!-- =================================================
+         PAGE 4 - BALLOONS
+    ================================================== -->
+
+    <section class="page" id="page4">
+
+        <div class="balloon-title">
+            Pop the balloons
+        </div>
+
+        <div class="balloon-area">
+
+            <div class="balloon b1"
+                 onclick="popBalloon(this, 'You make ordinary moments feel special.')">
+            </div>
+
+            <div class="balloon b2"
+                 onclick="popBalloon(this, 'I am really grateful for you.')">
+            </div>
+
+            <div class="balloon b3"
+                 onclick="popBalloon(this, 'Some people simply become important to your heart.')">
+            </div>
+
+            <div class="balloon b4"
+                 onclick="popBalloon(this, 'You are one of those people for me.')">
+            </div>
+
+            <div class="balloon-message" id="balloonMessage"></div>
+
+        </div>
+
+        <button class="next-btn" onclick="goToPage(5)">
+            Next
+        </button>
+
+    </section>
+
+
+    <!-- =================================================
+         PAGE 5 - PHOTOS
+    ================================================== -->
+
+    <section class="page" id="page5">
+
+        <div class="memory-title">
+            A walk down memory lane
+        </div>
+
+        <div class="photo-container">
+
+            <div class="photo-card">
+
+                <img src="data:image/jpeg;base64,__PHOTO1__">
+
+                <div class="photo-caption">
+                    One of my favourite pictures of you
+                </div>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img src="data:image/jpeg;base64,__PHOTO2__">
+
+                <div class="photo-caption">
+                    A moment I really love
+                </div>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img src="data:image/jpeg;base64,__PHOTO3__">
+
+                <div class="photo-caption">
+                    A picture that always makes me smile
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="next-btn" onclick="goToPage(6)">
+            Next
+        </button>
+
+    </section>
+
+
+    <!-- =================================================
+         PAGE 6 - ENVELOPE
+    ================================================== -->
+
+    <section class="page envelope-page" id="page6">
+
+        <div class="small-title">
+            A little letter for you
+        </div>
+
+        <div class="envelope-wrap" id="envelopeWrap">
+
+            <div class="envelope" id="envelope"
+                 onclick="openEnvelope()">
+
+                <div class="envelope-letter">
+
+                    <div class="letter-title">
+                        To Ricky
+                    </div>
+
+                    If life ever gives us the chance to walk
+                    through many more years together, I hope
+                    we keep choosing each other through every
+                    happy moment, every difficult day, and
+                    every little thing in between.
+
+                    <br><br>
+
+                    I don't know what the future has written
+                    for us, but if someday you become my life
+                    partner, I would want our life to be filled
+                    with friendship, understanding, laughter,
+                    respect and a lot of love.
+
+                    <br><br>
+
+                    Until then, I just want you to know that
+                    you are someone very special to me.
+
+                    <div class="from">
+                        From your Maggi ♥
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="next-btn" onclick="goToPage(7)">
+            Next
+        </button>
+
+    </section>
+
+
+    <!-- =================================================
+         PAGE 7 - FINAL
+    ================================================== -->
+
+    <section class="page" id="page7">
+
+        <div class="final-heart"></div>
+
+        <div class="final-text">
+            HAPPY BIRTHDAY<br>
+            RICKY
+        </div>
+
+        <button class="next-btn" onclick="finalPop()">
+            ♥
+        </button>
+
+    </section>
+
+
+    <!-- =================================================
+         FLASH + CONFETTI
+    ================================================== -->
+
+    <div class="pink-flash" id="pinkFlash"></div>
+
+    <div class="confetti-box" id="confettiBox"></div>
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function goToPage(number) {
+
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    const nextPage = document.getElementById("page" + number);
+
+    if (nextPage) {
+        nextPage.classList.add("active");
+    }
+
+
+    /* Tree animation starts fresh */
+
+    if (number === 2) {
+
+        const hearts =
+            document.querySelectorAll(".tree-heart");
+
+        hearts.forEach(function(heart) {
+
+            heart.style.animation = "none";
+
+            void heart.offsetWidth;
+
+            heart.style.animation = "";
+
+        });
+
+    }
+
+
+    /* Cake animation */
+
+    if (number === 3) {
+
+        const cake =
+            document.getElementById("cakeArea");
+
+        cake.classList.remove("build");
+
+        void cake.offsetWidth;
+
+        cake.classList.add("build");
+
+        setTimeout(function() {
+
+            document
+                .querySelector(".cake-message")
+                .classList.add("show");
+
+        }, 50);
+
+    }
+
+
+    /* Envelope comes to middle */
+
+    if (number === 6) {
+
+        const wrap =
+            document.getElementById("envelopeWrap");
+
+        wrap.classList.remove("enter");
+
+        void wrap.offsetWidth;
+
+        wrap.classList.add("enter");
+
+    }
+
+}
+
+
+/* =====================================================
+   START HEART
+===================================================== */
+
+document
+    .getElementById("startHeart")
+    .addEventListener("click", function() {
+
+        const heart = this;
+
+        heart.classList.add("blast-heart");
+
+        createParticles(
+            window.innerWidth / 2,
+            window.innerHeight / 2,
+            25
+        );
+
+        document
+            .getElementById("pinkFlash")
+            .classList.add("show");
+
+
+        setTimeout(function() {
+
+            goToPage(2);
+
+        }, 850);
+
+    });
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+function createParticles(x, y, amount) {
+
+    for (let i = 0; i < amount; i++) {
+
+        const particle =
+            document.createElement("div");
+
+        particle.className = "particle";
+
+        particle.style.left = x + "px";
+        particle.style.top = y + "px";
+
+        particle.style.setProperty(
+            "--x",
+            ((Math.random() - 0.5) * 500) + "px"
+        );
+
+        particle.style.setProperty(
+            "--y",
+            ((Math.random() - 0.5) * 500) + "px"
+        );
+
+        particle.style.background =
+            ["#f6a4c7",
+             "#ffd1e5",
+             "#ffffff",
+             "#e9b0df",
+             "#f3c0dc"]
+            [Math.floor(Math.random() * 5)];
+
+        document.body.appendChild(particle);
+
+        setTimeout(function() {
+
+            particle.remove();
+
+        }, 1300);
+    }
+}
+
+
+/* =====================================================
+   CAKE CONFETTI
+===================================================== */
+
+function cakeConfetti() {
+
+    const box =
+        document.getElementById("confettiBox");
+
+    const pieces = 45;
+
+    for (let i = 0; i < pieces; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left =
+            Math.random() * 100 + "%";
+
+        piece.style.background =
+            ["#f7a7c9",
+             "#ffd166",
+             "#b7d7f0",
+             "#d9a7e9",
+             "#ffffff",
+             "#f4c2d7"]
+            [Math.floor(Math.random() * 6)];
+
+        piece.style.animationDelay =
+            Math.random() * 0.8 + "s";
+
+        piece.style.transform =
+            "rotate(" +
+            Math.random() * 360 +
+            "deg)";
+
+        box.appendChild(piece);
+
+        setTimeout(function() {
+            piece.remove();
+        }, 3000);
+    }
+}
+
+
+/* Cake confetti after candle */
+
+setTimeout(function() {
+
+    const observer =
+        new MutationObserver(function() {
+
+            const cake =
+                document.getElementById("page3");
+
+            if (
+                cake &&
+                cake.classList.contains("active")
+            ) {
+
+                cakeConfetti();
+
+                observer.disconnect();
+            }
+
+        });
+
+    observer.observe(
+        document.body,
+        {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ["class"]
+        }
+    );
+
+}, 100);
+
+
+/* =====================================================
+   BALLOON POP
+===================================================== */
+
+function popBalloon(balloon, message) {
+
+    if (balloon.classList.contains("popped")) {
+        return;
+    }
+
+    balloon.classList.add("popped");
+
+    const rect =
+        balloon.getBoundingClientRect();
+
+    createParticles(
+        rect.left + rect.width / 2,
+        rect.top + rect.height / 2,
+        18
+    );
+
+    const messageBox =
+        document.getElementById("balloonMessage");
+
+    messageBox.innerText = message;
+
+    messageBox.classList.remove("show");
+
+    void messageBox.offsetWidth;
+
+    messageBox.classList.add("show");
+}
+
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+function openEnvelope() {
+
+    const envelope =
+        document.getElementById("envelope");
+
+    envelope.classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   FINAL POP
+===================================================== */
+
+function finalPop() {
+
+    createParticles(
+        window.innerWidth / 2,
+        window.innerHeight / 2,
+        70
+    );
+
+    cakeConfetti();
+
+    const heart =
+        document.querySelector(".final-heart");
+
+    heart.style.animation =
+        "heartBlast 0.7s forwards";
+
+}
+
+</script>
+
+</body>
+</html>
+"""
+
+
+# ---------------------------------------------------------
+# INSERT PHOTOS
+# ---------------------------------------------------------
+
+html = html.replace(
+    "__PHOTO1__",
+    photo1
+)
+
+html = html.replace(
+    "__PHOTO2__",
+    photo2
+)
+
+html = html.replace(
+    "__PHOTO3__",
+    photo3
+)
+
+
+# ---------------------------------------------------------
+# RUN
+# ---------------------------------------------------------
+
+components.html(
+    html,
+    height=850,
+    scrolling=False
+)
