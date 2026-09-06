@@ -66,30 +66,36 @@ html = r"""
 
 html,
 body {
+
     margin: 0;
     padding: 0;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
 }
 
 body {
+
     font-family: "Patrick Hand", cursive;
+
+    background: #32102f;
 }
 
 
 /* =========================================================
    MAIN BACKGROUND
-   BRIGHT PURPLE / PINK GLOW LIKE VIDEO
 ========================================================= */
 
 .app {
 
-    position: relative;
-
     width: 100%;
     height: 100vh;
+
     min-height: 700px;
+
+    position: relative;
 
     overflow: hidden;
 
@@ -98,35 +104,35 @@ body {
     background:
 
         radial-gradient(
-            circle at 50% 25%,
-            rgba(221, 119, 205, 0.62),
+            circle at 50% 20%,
+            rgba(255,150,207,0.40),
             transparent 28%
         ),
 
         radial-gradient(
-            circle at 15% 65%,
-            rgba(184, 72, 173, 0.45),
+            circle at 15% 75%,
+            rgba(191,104,189,0.35),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 85% 70%,
-            rgba(208, 87, 181, 0.42),
-            transparent 30%
+            rgba(226,126,188,0.28),
+            transparent 32%
         ),
 
         linear-gradient(
-            180deg,
-            #70266f 0%,
-            #581756 38%,
-            #3b103b 72%,
-            #230823 100%
+            135deg,
+            #7b326f 0%,
+            #592254 32%,
+            #42163f 68%,
+            #2c0d2c 100%
         );
 }
 
 
 /* =========================================================
-   EXTRA GLOW
+   GLOWING BACKGROUND
 ========================================================= */
 
 .app::before {
@@ -135,31 +141,116 @@ body {
 
     position: absolute;
 
-    width: 650px;
-    height: 650px;
+    width: 550px;
+    height: 550px;
 
     left: 50%;
-    top: 35%;
+    top: 50%;
 
     transform: translate(-50%, -50%);
-
-    border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255, 150, 220, 0.18),
+            rgba(255,173,218,0.15),
             transparent 65%
         );
 
-    filter: blur(20px);
+    filter: blur(15px);
 
     pointer-events: none;
 }
 
 
 /* =========================================================
-   MOVING SPARKLES
+   TRANSPARENT HEARTS BACKGROUND
+========================================================= */
+
+.bg-heart {
+
+    position: absolute;
+
+    color: rgba(255,205,232,0.16);
+
+    font-family: Arial, sans-serif;
+
+    pointer-events: none;
+
+    animation:
+        heartFloat
+        var(--speed)
+        ease-in-out
+        infinite alternate;
+
+    z-index: 1;
+}
+
+.h1 {
+    left: 5%;
+    top: 14%;
+    font-size: 52px;
+    --speed: 5s;
+}
+
+.h2 {
+    left: 82%;
+    top: 18%;
+    font-size: 38px;
+    --speed: 6s;
+}
+
+.h3 {
+    left: 14%;
+    top: 72%;
+    font-size: 32px;
+    --speed: 4.5s;
+}
+
+.h4 {
+    left: 88%;
+    top: 72%;
+    font-size: 58px;
+    --speed: 5.5s;
+}
+
+.h5 {
+    left: 47%;
+    top: 8%;
+    font-size: 28px;
+    --speed: 4s;
+}
+
+.h6 {
+    left: 70%;
+    top: 84%;
+    font-size: 30px;
+    --speed: 6s;
+}
+
+.h7 {
+    left: 28%;
+    top: 35%;
+    font-size: 25px;
+    --speed: 5s;
+}
+
+
+@keyframes heartFloat {
+
+    from {
+        transform: translateY(0) rotate(-8deg);
+        opacity: 0.10;
+    }
+
+    to {
+        transform: translateY(-18px) rotate(8deg);
+        opacity: 0.25;
+    }
+}
+
+
+/* =========================================================
+   SPARKLES
 ========================================================= */
 
 .sparkle {
@@ -171,15 +262,14 @@ body {
 
     border-radius: 50%;
 
-    background: white;
+    background: rgba(255,255,255,0.90);
 
     box-shadow:
-        0 0 7px white,
-        0 0 15px rgba(255, 200, 240, 0.9);
+        0 0 9px rgba(255,255,255,0.9);
 
     pointer-events: none;
 
-    opacity: 0.3;
+    z-index: 2;
 
     animation:
         sparkleMove
@@ -194,42 +284,28 @@ body {
 @keyframes sparkleMove {
 
     0% {
-
         transform:
-            translate(0, 0)
-            scale(0.4);
+            translate(0,0)
+            scale(0.5);
 
         opacity: 0.15;
     }
 
-    25% {
-        opacity: 0.8;
-    }
-
     50% {
-
         transform:
-            translate(
-                var(--moveX),
-                var(--moveY)
-            )
+            translate(var(--moveX), var(--moveY))
             scale(1.5);
 
         opacity: 1;
     }
 
-    75% {
-        opacity: 0.55;
-    }
-
     100% {
-
         transform:
             translate(
-                calc(var(--moveX) * -0.7),
-                calc(var(--moveY) * -0.6)
+                calc(var(--moveX) * -0.5),
+                calc(var(--moveY) * -0.5)
             )
-            scale(0.4);
+            scale(0.5);
 
         opacity: 0.15;
     }
@@ -272,13 +348,13 @@ body {
 
 .small-title {
 
-    font-size: 21px;
+    font-size: 23px;
 
-    color: #fff5fb;
+    letter-spacing: 1px;
 
     margin-bottom: 18px;
 
-    letter-spacing: 1px;
+    color: #ffeaf6;
 }
 
 
@@ -286,24 +362,24 @@ body {
 
     font-family: "Delius", cursive;
 
-    font-size: 42px;
+    font-size: 43px;
 
     line-height: 1.15;
 
     color: white;
 
     text-shadow:
-        0 3px 12px rgba(0,0,0,0.25);
+        0 3px 15px rgba(0,0,0,0.25);
 }
 
 
 .sub-title {
 
-    font-size: 22px;
+    font-size: 23px;
 
-    margin-top: 8px;
+    margin-top: 10px;
 
-    color: #ffe6f3;
+    color: #ffe2f2;
 }
 
 
@@ -313,27 +389,26 @@ body {
 
 .next-btn {
 
+    margin-top: 25px;
+
     border: none;
+
     outline: none;
 
-    margin-top: 22px;
-
-    padding: 9px 28px;
+    padding: 10px 28px;
 
     border-radius: 30px;
 
     background:
         linear-gradient(
             180deg,
-            #f5b1d1,
-            #df82b2
+            #f7acd1,
+            #dc78ad
         );
 
     color: white;
 
-    font-family:
-        "Patrick Hand",
-        cursive;
+    font-family: "Patrick Hand", cursive;
 
     font-size: 20px;
 
@@ -347,8 +422,7 @@ body {
 
 .next-btn:hover {
 
-    transform:
-        scale(1.07);
+    transform: scale(1.06);
 }
 
 
@@ -356,26 +430,17 @@ body {
    PAGE 1 - HEART
 ========================================================= */
 
-.first-heart-page {
-
-    justify-content: center;
-}
-
-
-/* heart area */
-
 .first-heart-area {
 
     position: relative;
 
-    width: 300px;
-    height: 300px;
+    width: 270px;
+
+    height: 270px;
 
     margin-top: 5px;
 }
 
-
-/* heart */
 
 .start-heart {
 
@@ -384,19 +449,19 @@ body {
     width: 105px;
     height: 105px;
 
-    left: 98px;
-    top: 92px;
+    left: 82px;
+    top: 80px;
 
-    background: #f18bb6;
+    background: #f17fab;
 
-    transform:
-        rotate(-45deg);
+    transform: rotate(-45deg);
 
-    border-radius: 13px;
+    border-radius: 12px;
 
     box-shadow:
-        0 0 30px rgba(255, 155, 205, 0.6),
-        0 0 65px rgba(255, 120, 190, 0.25);
+        0 0 30px rgba(255,139,191,0.65);
+
+    cursor: pointer;
 
     z-index: 5;
 
@@ -414,7 +479,7 @@ body {
     width: 105px;
     height: 105px;
 
-    background: #f18bb6;
+    background: #f17fab;
 
     border-radius: 50%;
 }
@@ -434,72 +499,11 @@ body {
 }
 
 
-/* =========================================================
-   ARROW - STARTS AT CORNER
-========================================================= */
-
-.arrow {
-
-    position: absolute;
-
-    left: -10px;
-    bottom: 10px;
-
-    width: 115px;
-    height: 7px;
-
-    background: #6c2946;
-
-    border-radius: 10px;
+.start-heart:hover {
 
     transform:
-        rotate(-28deg);
-
-    transform-origin: left center;
-
-    cursor: pointer;
-
-    z-index: 20;
-
-    box-shadow:
-        0 2px 5px rgba(0,0,0,0.2);
-
-    transition:
-        left 0.7s ease,
-        bottom 0.7s ease,
-        transform 0.7s ease;
-}
-
-
-.arrow::after {
-
-    content: "";
-
-    position: absolute;
-
-    right: -3px;
-    top: -7px;
-
-    border-left:
-        20px solid #6c2946;
-
-    border-top:
-        10px solid transparent;
-
-    border-bottom:
-        10px solid transparent;
-}
-
-
-/* arrow travels to heart */
-
-.arrow.shoot {
-
-    left: 120px;
-    bottom: 143px;
-
-    transform:
-        rotate(-45deg);
+        rotate(-45deg)
+        scale(1.08);
 }
 
 
@@ -507,7 +511,7 @@ body {
    HEART BLAST
 ========================================================= */
 
-.start-heart.blast {
+.blast-heart {
 
     animation:
         heartBlast
@@ -533,7 +537,7 @@ body {
             rotate(-45deg)
             scale(1.45);
 
-        opacity: 0.85;
+        opacity: 1;
     }
 
     100% {
@@ -559,17 +563,17 @@ body {
 
     background:
         radial-gradient(
-            circle,
-            #ffd0e5,
-            #f39ac5 45%,
-            #b95491 100%
+            circle at center,
+            #ffd0e5 0%,
+            #f49ac5 45%,
+            #df75ac 100%
         );
 
     opacity: 0;
 
     pointer-events: none;
 
-    z-index: 9000;
+    z-index: 1000;
 }
 
 
@@ -586,71 +590,17 @@ body {
 
     0% {
         opacity: 0;
+        transform: scale(0.2);
     }
 
-    20% {
-        opacity: 0.98;
-    }
-
-    65% {
-        opacity: 0.75;
+    35% {
+        opacity: 0.96;
+        transform: scale(1);
     }
 
     100% {
         opacity: 0;
-    }
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-.particle {
-
-    position: fixed;
-
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #ffd9eb;
-
-    pointer-events: none;
-
-    z-index: 9500;
-
-    animation:
-        particleFly
-        1.2s
-        ease-out
-        forwards;
-}
-
-
-@keyframes particleFly {
-
-    0% {
-
-        transform:
-            translate(0,0)
-            scale(1);
-
-        opacity: 1;
-    }
-
-    100% {
-
-        transform:
-            translate(
-                var(--x),
-                var(--y)
-            )
-            rotate(360deg)
-            scale(0.1);
-
-        opacity: 0;
+        transform: scale(1.5);
     }
 }
 
@@ -670,34 +620,38 @@ body {
     position: relative;
 
     width: 330px;
-    height: 410px;
 
-    margin-top: 0;
+    height: 380px;
+
+    margin-top: 5px;
+
+    flex-shrink: 0;
 }
 
-
-/* plate */
 
 .plate {
 
     position: absolute;
 
     width: 255px;
-    height: 20px;
+    height: 19px;
 
+    bottom: 18px;
     left: 37px;
-    bottom: 42px;
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,0.85);
+    background:
+        rgba(255,255,255,0.88);
 
     box-shadow:
-        0 5px 12px rgba(0,0,0,0.25);
+        0 6px 13px rgba(0,0,0,0.22);
 }
 
 
-/* cake layers */
+/* =========================================================
+   CAKE LAYERS
+========================================================= */
 
 .cake-layer {
 
@@ -705,16 +659,15 @@ body {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     border-radius: 10px;
 
     background:
         linear-gradient(
             180deg,
-            #f8b5d3,
-            #dc7cab
+            #f8b7d4,
+            #df7eaf
         );
 
     box-shadow:
@@ -727,31 +680,33 @@ body {
 .layer3 {
 
     width: 230px;
-    height: 67px;
+    height: 65px;
 
-    bottom: 59px;
+    bottom: 35px;
 }
 
 
 .layer2 {
 
     width: 195px;
-    height: 62px;
+    height: 60px;
 
-    bottom: 117px;
+    bottom: 91px;
 }
 
 
 .layer1 {
 
     width: 155px;
-    height: 55px;
+    height: 54px;
 
-    bottom: 170px;
+    bottom: 145px;
 }
 
 
-/* cream */
+/* =========================================================
+   CREAM
+========================================================= */
 
 .cream {
 
@@ -759,14 +714,13 @@ body {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     height: 14px;
 
     border-radius: 50%;
 
-    background: #fffaff;
+    background: #fffafd;
 
     opacity: 0;
 
@@ -777,46 +731,47 @@ body {
 .cream1 {
 
     width: 145px;
-    bottom: 165px;
+    bottom: 140px;
 }
 
 
 .cream2 {
 
     width: 184px;
-    bottom: 112px;
+    bottom: 87px;
 }
 
 
 .cream3 {
 
     width: 220px;
-    bottom: 55px;
+    bottom: 29px;
 }
 
 
-/* candle */
+/* =========================================================
+   CANDLE
+========================================================= */
 
 .candle {
 
     position: absolute;
 
     width: 19px;
-    height: 75px;
+    height: 70px;
 
     left: 50%;
-    bottom: 225px;
+    bottom: 198px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     background:
         repeating-linear-gradient(
             -45deg,
-            #ffffff 0px,
+            #ffffff,
             #ffffff 8px,
-            #f0a2c6 8px,
-            #f0a2c6 16px
+            #efa4c6 8px,
+            #efa4c6 16px
         );
 
     border-radius: 5px;
@@ -827,7 +782,9 @@ body {
 }
 
 
-/* flame */
+/* =========================================================
+   FLAME
+========================================================= */
 
 .flame {
 
@@ -837,34 +794,36 @@ body {
     height: 27px;
 
     left: 50%;
-    bottom: 295px;
+    bottom: 266px;
 
     transform:
         translateX(-50%)
         rotate(45deg);
 
-    background: #ffe89b;
+    background: #ffe79c;
 
     border-radius:
         50% 50% 50% 0;
 
     opacity: 0;
 
-    z-index: 8;
-
     box-shadow:
-        0 0 18px #ffd878;
+        0 0 18px #ffd67b;
+
+    z-index: 8;
 }
 
 
-/* cake animation */
+/* =========================================================
+   CAKE BUILD ANIMATION
+========================================================= */
 
 .cake-area.build .layer3 {
 
     animation:
         layerDrop
         0.65s
-        0.2s
+        0.15s
         forwards;
 }
 
@@ -874,7 +833,7 @@ body {
     animation:
         layerDrop
         0.65s
-        0.9s
+        0.85s
         forwards;
 }
 
@@ -884,7 +843,7 @@ body {
     animation:
         layerDrop
         0.65s
-        1.6s
+        1.55s
         forwards;
 }
 
@@ -894,7 +853,7 @@ body {
     animation:
         creamAppear
         0.45s
-        2.15s
+        2.10s
         forwards;
 }
 
@@ -904,7 +863,7 @@ body {
     animation:
         creamAppear
         0.45s
-        2.45s
+        2.40s
         forwards;
 }
 
@@ -914,7 +873,7 @@ body {
     animation:
         creamAppear
         0.45s
-        2.75s
+        2.70s
         forwards;
 }
 
@@ -923,8 +882,8 @@ body {
 
     animation:
         candleDrop
-        0.7s
-        3.1s
+        0.65s
+        3.05s
         forwards;
 }
 
@@ -933,17 +892,21 @@ body {
 
     animation:
         flameDrop
-        0.6s
-        3.55s
+        0.55s
+        3.45s
         forwards,
 
         flicker
         0.8s
-        4.15s
+        4s
         infinite
         alternate;
 }
 
+
+/* =========================================================
+   LAYER DROP
+========================================================= */
 
 @keyframes layerDrop {
 
@@ -959,7 +922,7 @@ body {
     70% {
 
         transform:
-            translate(-50%, 10px)
+            translate(-50%, 8px)
             scale(1.03);
 
         opacity: 1;
@@ -984,7 +947,7 @@ body {
 
         transform:
             translateX(-50%)
-            scaleX(0.4);
+            scaleX(0.35);
     }
 
     to {
@@ -1005,14 +968,14 @@ body {
         opacity: 0;
 
         transform:
-            translate(-50%, -180px)
+            translate(-50%, -170px)
             rotate(-10deg);
     }
 
     75% {
 
         transform:
-            translate(-50%, 8px)
+            translate(-50%, 7px)
             rotate(4deg);
     }
 
@@ -1069,32 +1032,30 @@ body {
 }
 
 
-/* HAPPY BIRTHDAY BELOW CAKE */
+/* =========================================================
+   HAPPY BIRTHDAY UNDER CAKE
+========================================================= */
 
 .cake-message {
 
-    position: absolute;
-
-    left: 50%;
-
-    bottom: -3px;
-
-    transform:
-        translateX(-50%);
-
     width: 100%;
+
+    margin-top: 8px;
 
     font-family:
         "Delius",
         cursive;
 
-    font-size: 35px;
+    font-size: 34px;
 
-    line-height: 1.1;
+    line-height: 1.15;
 
     color: white;
 
     opacity: 0;
+
+    text-shadow:
+        0 3px 12px rgba(0,0,0,0.25);
 }
 
 
@@ -1115,8 +1076,8 @@ body {
         opacity: 0;
 
         transform:
-            translateX(-50%)
-            translateY(18px);
+            translateY(18px)
+            scale(0.9);
     }
 
     to {
@@ -1124,8 +1085,8 @@ body {
         opacity: 1;
 
         transform:
-            translateX(-50%)
-            translateY(0);
+            translateY(0)
+            scale(1);
     }
 }
 
@@ -1144,47 +1105,49 @@ body {
 
     font-size: 27px;
 
-    margin-bottom: 15px;
+    margin-bottom: 22px;
 
-    color: #fff8fc;
+    color: #ffeaf5;
 }
 
 
 .balloon-area {
 
-    position: relative;
+    width: 360px;
 
-    width: 370px;
     height: 390px;
+
+    position: relative;
 }
 
 
-/* balloons */
+/* =========================================================
+   BALLOONS
+========================================================= */
 
 .balloon {
 
     position: absolute;
 
-    width: 76px;
-    height: 98px;
+    width: 75px;
+    height: 96px;
 
     border-radius:
-        50% 50% 46% 46%;
+        50% 50% 45% 45%;
 
     cursor: pointer;
 
-    z-index: 5;
+    transition: 0.15s;
 
     box-shadow:
 
-        inset -12px -10px 18px
-        rgba(0,0,0,0.12),
+        inset -12px -9px 18px
+        rgba(0,0,0,0.13),
 
-        inset 8px 6px 12px
-        rgba(255,255,255,0.35);
+        inset 8px 5px 10px
+        rgba(255,255,255,0.28);
 
-    transition:
-        transform 0.2s;
+    z-index: 4;
 }
 
 
@@ -1195,13 +1158,15 @@ body {
     position: absolute;
 
     width: 2px;
-    height: 110px;
 
-    top: 94px;
-    left: 50%;
+    height: 92px;
 
     background:
-        rgba(255,255,255,0.65);
+        rgba(255,255,255,0.60);
+
+    top: 94px;
+
+    left: 50%;
 }
 
 
@@ -1211,14 +1176,15 @@ body {
 
     position: absolute;
 
-    width: 0;
-    height: 0;
-
     bottom: -7px;
+
     left: 50%;
 
     transform:
         translateX(-50%);
+
+    width: 0;
+    height: 0;
 
     border-left:
         6px solid transparent;
@@ -1233,48 +1199,48 @@ body {
 
 .b1 {
 
-    left: 35px;
+    left: 38px;
     top: 50px;
 
-    background: #f3a8c9;
-    color: #f3a8c9;
+    background: #f5a5c8;
+    color: #f5a5c8;
 }
 
 
 .b2 {
 
-    left: 145px;
-    top: 5px;
+    left: 137px;
+    top: 8px;
 
-    background: #e6afd9;
-    color: #e6afd9;
+    background: #dfabd8;
+    color: #dfabd8;
 }
 
 
 .b3 {
 
-    left: 255px;
+    left: 230px;
     top: 52px;
 
-    background: #a9cfe0;
-    color: #a9cfe0;
+    background: #a9c2dc;
+    color: #a9c2dc;
 }
 
 
 .b4 {
 
-    left: 145px;
-    top: 145px;
+    left: 135px;
+    top: 135px;
 
-    background: #f2b8d5;
-    color: #f2b8d5;
+    background: #f1bdd9;
+    color: #f1bdd9;
 }
 
 
 .balloon:hover {
 
     transform:
-        translateY(-6px)
+        translateY(-5px)
         scale(1.05);
 }
 
@@ -1283,7 +1249,7 @@ body {
 
     animation:
         popBalloon
-        0.35s
+        0.38s
         forwards;
 }
 
@@ -1292,24 +1258,21 @@ body {
 
     0% {
 
-        transform:
-            scale(1);
+        transform: scale(1);
 
         opacity: 1;
     }
 
     45% {
 
-        transform:
-            scale(1.35);
+        transform: scale(1.35);
 
-        opacity: 0.8;
+        opacity: 0.85;
     }
 
     100% {
 
-        transform:
-            scale(0);
+        transform: scale(0);
 
         opacity: 0;
     }
@@ -1317,35 +1280,37 @@ body {
 
 
 /* =========================================================
-   BALLOON MESSAGE - TRANSPARENT PINK BOX
+   BALLOON MESSAGE
 ========================================================= */
 
 .balloon-message {
 
     position: absolute;
 
-    left: 50%;
-    bottom: 0;
+    width: 325px;
 
-    width: 330px;
+    left: 50%;
+
+    bottom: 10px;
 
     transform:
         translateX(-50%)
         translateY(20px);
 
-    padding: 14px 20px;
+    padding: 14px 19px;
 
     border-radius: 18px;
 
     background:
-        rgba(246, 157, 199, 0.32);
+        rgba(245,158,198,0.28);
 
     border:
         1px solid
-        rgba(255, 225, 240, 0.42);
+        rgba(255,225,240,0.40);
 
     box-shadow:
-        0 7px 22px rgba(0,0,0,0.13);
+        0 7px 22px
+        rgba(0,0,0,0.13);
 
     backdrop-filter:
         blur(4px);
@@ -1353,16 +1318,17 @@ body {
     -webkit-backdrop-filter:
         blur(4px);
 
-    color: #fff9fc;
-
     font-size: 21px;
 
     line-height: 1.2;
 
+    color: #fff8fc;
+
     opacity: 0;
 
     transition:
-        0.45s ease;
+        opacity 0.45s ease,
+        transform 0.45s ease;
 }
 
 
@@ -1384,9 +1350,9 @@ body {
 
     font-size: 27px;
 
-    margin-bottom: 22px;
+    margin-bottom: 25px;
 
-    color: #fff8fc;
+    color: #ffeaf5;
 }
 
 
@@ -1419,13 +1385,12 @@ body {
 
     box-shadow:
         0 10px 25px
-        rgba(0,0,0,0.28);
+        rgba(0,0,0,0.25);
 
     transform:
         rotate(-2deg);
 
-    transition:
-        0.3s;
+    transition: 0.3s;
 }
 
 
@@ -1456,6 +1421,7 @@ body {
     display: block;
 
     width: 100%;
+
     height: 230px;
 
     object-fit: cover;
@@ -1486,12 +1452,13 @@ body {
 }
 
 
-.envelope-area {
+.envelope-wrapper {
+
+    width: 330px;
+
+    height: 230px;
 
     position: relative;
-
-    width: 340px;
-    height: 300px;
 
     cursor: pointer;
 
@@ -1508,15 +1475,17 @@ body {
     0% {
 
         transform:
-            translateX(-600px);
+            translateX(-120vw)
+            rotate(-8deg);
 
         opacity: 0;
     }
 
-    70% {
+    65% {
 
         transform:
-            translateX(35px);
+            translateX(25px)
+            rotate(2deg);
 
         opacity: 1;
     }
@@ -1524,45 +1493,67 @@ body {
     100% {
 
         transform:
-            translateX(0);
+            translateX(0)
+            rotate(0);
 
         opacity: 1;
     }
 }
 
 
-/* envelope */
-
 .envelope {
 
     position: absolute;
 
-    width: 280px;
-    height: 185px;
+    width: 300px;
+    height: 190px;
 
-    left: 30px;
-    top: 55px;
+    left: 15px;
+    top: 20px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f6bfd8,
-            #e98db8
-        );
+    background: #f5d5c6;
 
     border-radius: 8px;
 
     box-shadow:
-        0 15px 35px
-        rgba(0,0,0,0.28);
+        0 12px 28px
+        rgba(0,0,0,0.30);
 
-    z-index: 5;
+    overflow: hidden;
 }
 
 
-/* envelope lower folds */
-
 .envelope::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        150px solid transparent;
+
+    border-right:
+        150px solid transparent;
+
+    border-top:
+        105px solid #e8bcae;
+
+    z-index: 3;
+
+    transform-origin: top center;
+
+    transition:
+        transform 0.8s ease;
+}
+
+
+.envelope::after {
 
     content: "";
 
@@ -1575,151 +1566,100 @@ body {
     height: 0;
 
     border-left:
-        140px solid transparent;
+        150px solid #dca99e;
 
-    border-right:
-        140px solid transparent;
+    border-top:
+        95px solid transparent;
 
     border-bottom:
-        100px solid #dc79aa;
+        95px solid transparent;
+
+    z-index: 4;
+}
+
+
+.envelope-right {
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-right:
+        150px solid #d6a097;
+
+    border-top:
+        95px solid transparent;
+
+    border-bottom:
+        95px solid transparent;
+
+    z-index: 4;
+}
+
+
+.envelope-letter-preview {
+
+    position: absolute;
+
+    width: 190px;
+    height: 105px;
+
+    left: 55px;
+    top: 38px;
+
+    background: #fff8ec;
 
     z-index: 2;
+
+    border-radius: 3px;
+
+    color: #65334e;
+
+    padding: 18px 10px;
+
+    font-family:
+        "Delius",
+        cursive;
+
+    font-size: 17px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0,0,0,0.15);
 }
 
 
-/* side folds */
+.envelope-page::after {
 
-.envelope::after {
+    content:
+        "Tap the letter";
 
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 0;
-    height: 0;
-
-    border-left:
-        140px solid #f1a6c9;
-
-    border-top:
-        92px solid transparent;
-
-    border-bottom:
-        92px solid transparent;
-
-    opacity: 0.9;
-
-    z-index: 3;
-}
-
-
-/* flap */
-
-.envelope-flap {
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 0;
-    height: 0;
-
-    border-left:
-        140px solid transparent;
-
-    border-right:
-        140px solid transparent;
-
-    border-top:
-        105px solid #f7c6dd;
-
-    transform-origin: top center;
-
-    transition:
-        0.8s ease;
-
-    z-index: 8;
-}
-
-
-/* heart seal */
-
-.seal {
-
-    position: absolute;
-
-    left: 50%;
-    top: 88px;
-
-    width: 30px;
-    height: 30px;
-
-    transform:
-        translateX(-50%)
-        rotate(-45deg);
-
-    background: #e477a9;
-
-    border-radius: 6px;
-
-    z-index: 10;
-
-    transition:
-        0.5s;
-}
-
-
-.seal::before,
-.seal::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 30px;
-    height: 30px;
-
-    background: #e477a9;
-
-    border-radius: 50%;
-}
-
-
-.seal::before {
-
-    top: -15px;
-    left: 0;
-}
-
-
-.seal::after {
-
-    top: 0;
-    left: 15px;
-}
-
-
-/* click hint */
-
-.envelope-hint {
-
-    position: absolute;
-
-    width: 100%;
-
-    bottom: 5px;
-
-    left: 0;
+    margin-top: 18px;
 
     font-size: 21px;
 
-    color: #ffeaf5;
+    color: #ffe8f4;
 
-    z-index: 20;
+    animation:
+        hintPulse
+        1.5s
+        infinite;
+}
+
+
+@keyframes hintPulse {
+
+    0%, 100% {
+        opacity: 0.55;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 
@@ -1727,139 +1667,178 @@ body {
    FULL LETTER
 ========================================================= */
 
-.letter {
+.letter-full {
 
-    position: absolute;
+    position: fixed;
 
-    left: 50%;
-    top: 50%;
+    inset: 0;
 
-    width: min(620px, 88vw);
-    min-height: 560px;
+    display: none;
 
-    transform:
-        translate(-50%, -50%)
-        scale(0.15);
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 35px;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(255,201,225,0.25),
+            transparent 40%
+        ),
+
+        linear-gradient(
+            135deg,
+            #7b326f,
+            #4c1c49,
+            #321032
+        );
+
+    z-index: 2000;
 
     opacity: 0;
+}
 
-    pointer-events: none;
 
-    padding: 42px 38px;
+.letter-full.open {
+
+    display: flex;
+
+    animation:
+        letterOpen
+        0.9s
+        forwards;
+}
+
+
+@keyframes letterOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.92);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+.letter-paper {
+
+    width: min(700px, 92vw);
+
+    min-height: 430px;
+
+    padding: 55px 45px;
 
     background:
         linear-gradient(
-            135deg,
-            #fffdf8,
-            #fff7fa
+            180deg,
+            #fffaf1,
+            #fff3e2
         );
+
+    color: #5b2948;
 
     border-radius: 5px;
 
     box-shadow:
-        0 20px 55px
+        0 18px 45px
         rgba(0,0,0,0.35);
 
-    color: #54213f;
+    position: relative;
 
-    text-align: left;
-
-    z-index: 100;
-
-    transition:
-        transform 0.9s cubic-bezier(.17,.89,.32,1.25),
-        opacity 0.55s;
+    font-family:
+        "Patrick Hand",
+        cursive;
 }
 
 
-.envelope-area.open .letter {
-
-    transform:
-        translate(-50%, -50%)
-        scale(1);
-
-    opacity: 1;
-
-    pointer-events: auto;
-}
-
-
-.envelope-area.open .envelope {
-
-    opacity: 0;
-
-    transform:
-        scale(0.5);
-
-    transition:
-        0.5s;
-}
-
-
-.envelope-area.open .envelope-flap,
-.envelope-area.open .seal,
-.envelope-area.open .envelope-hint {
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-        0.3s;
-}
-
-
-.letter-to {
+.letter-paper h1 {
 
     font-family:
         "Delius",
         cursive;
 
-    font-size: 30px;
+    font-size: 42px;
 
-    margin-bottom: 22px;
+    line-height: 1.15;
 
-    color: #733052;
+    margin:
+        0 0 25px;
+
+    color: #742e5d;
 }
 
 
-.letter-text {
+.letter-paper p {
+
+    font-size: 24px;
+
+    line-height: 1.45;
+
+    margin:
+        12px 0;
+}
+
+
+.letter-from {
+
+    margin-top: 30px;
+
+    font-size: 25px;
+
+    text-align: right;
+
+    color: #742e5d;
+}
+
+
+.close-letter {
+
+    margin-top: 18px;
+
+    border: none;
+
+    padding: 9px 22px;
+
+    border-radius: 25px;
+
+    background: rgba(255,190,220,0.75);
+
+    color: #652847;
 
     font-family:
         "Patrick Hand",
         cursive;
 
-    font-size: 22px;
+    font-size: 19px;
 
-    line-height: 1.55;
-
-    color: #5b2948;
-}
-
-
-.letter-sign {
-
-    margin-top: 30px;
-
-    text-align: right;
-
-    font-family:
-        "Delius",
-        cursive;
-
-    font-size: 27px;
-
-    color: #733052;
+    cursor: pointer;
 }
 
 
 /* =========================================================
-   PAGE 6 - FINAL
+   FINAL PAGE
 ========================================================= */
 
 .final-page {
 
     justify-content: center;
+
+    overflow: hidden;
 }
 
 
@@ -1867,75 +1846,96 @@ body {
 
     position: relative;
 
-    width: 125px;
-    height: 125px;
+    width: 145px;
 
-    margin-bottom: 35px;
+    height: 145px;
 
-    transform:
-        rotate(-45deg);
+    margin-bottom: 20px;
 
-    background: #f19ac1;
+    animation:
+        finalHeartPop
+        0.9s
+        cubic-bezier(.17,.67,.36,1.4)
+        both;
+}
+
+
+.final-heart-shape {
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    left: 18px;
+    top: 20px;
+
+    background: #f28ab4;
+
+    transform: rotate(-45deg);
 
     border-radius: 14px;
 
     box-shadow:
-        0 0 35px rgba(255,160,210,0.55),
-        0 0 80px rgba(255,140,205,0.25);
-
-    animation:
-        finalHeartbeat
-        1.8s
-        ease-in-out
-        infinite;
+        0 0 40px
+        rgba(255,142,192,0.60);
 }
 
 
-.final-heart::before,
-.final-heart::after {
+.final-heart-shape::before,
+.final-heart-shape::after {
 
     content: "";
 
     position: absolute;
 
-    width: 125px;
-    height: 125px;
+    width: 110px;
+    height: 110px;
 
-    background: #f19ac1;
+    background: #f28ab4;
 
     border-radius: 50%;
 }
 
 
-.final-heart::before {
+.final-heart-shape::before {
 
-    top: -62px;
+    top: -55px;
     left: 0;
 }
 
 
-.final-heart::after {
+.final-heart-shape::after {
 
     top: 0;
-    left: 62px;
+    left: 55px;
 }
 
 
-@keyframes finalHeartbeat {
+@keyframes finalHeartPop {
 
-    0%,
+    0% {
+
+        transform:
+            scale(0);
+
+        opacity: 0;
+    }
+
+    65% {
+
+        transform:
+            scale(1.18);
+
+        opacity: 1;
+    }
+
     100% {
 
         transform:
-            rotate(-45deg)
             scale(1);
-    }
 
-    50% {
-
-        transform:
-            rotate(-45deg)
-            scale(1.08);
+        opacity: 1;
     }
 }
 
@@ -1946,86 +1946,102 @@ body {
         "Delius",
         cursive;
 
-    font-size: 48px;
+    font-size: 47px;
 
-    line-height: 1.1;
+    line-height: 1.15;
 
     color: white;
 
     text-shadow:
-        0 4px 15px rgba(0,0,0,0.25);
+        0 4px 16px rgba(0,0,0,0.25);
+
+    animation:
+        finalTextPop
+        0.9s
+        0.45s
+        both;
 }
 
 
-.final-name {
+@keyframes finalTextPop {
 
-    margin-top: 10px;
+    from {
 
-    font-family:
-        "Delius",
-        cursive;
+        opacity: 0;
 
-    font-size: 31px;
+        transform:
+            translateY(25px)
+            scale(0.9);
+    }
 
-    color: #ffd9ea;
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
 }
 
 
 /* =========================================================
-   FINAL CONFETTI
+   COLOUR PAPER PIECES
 ========================================================= */
 
-.confetti-box {
+.paper-piece {
 
     position: fixed;
 
-    inset: 0;
+    width: 10px;
+    height: 17px;
+
+    top: 50%;
+
+    left: 50%;
+
+    z-index: 6000;
 
     pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 8000;
-}
-
-
-.confetti {
-
-    position: absolute;
-
-    width: 7px;
-    height: 13px;
-
-    top: -20px;
 
     opacity: 0;
 
     animation:
-        confettiFall
-        2.5s
-        linear
+        paperPop
+        1.8s
+        ease-out
         forwards;
 }
 
 
-@keyframes confettiFall {
+@keyframes paperPop {
 
     0% {
 
+        opacity: 0;
+
         transform:
-            translateY(0)
-            rotate(0deg);
+            translate(-50%, -50%)
+            rotate(0deg)
+            scale(0.4);
+    }
+
+    15% {
 
         opacity: 1;
     }
 
     100% {
 
-        transform:
-            translateY(110vh)
-            rotate(720deg);
+        opacity: 1;
 
-        opacity: 0.9;
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            rotate(var(--rotate))
+            scale(1);
     }
 }
 
@@ -2037,126 +2053,123 @@ body {
 @media (max-width: 700px) {
 
     .big-title {
-        font-size: 34px;
+        font-size: 35px;
     }
 
     .sub-title {
-        font-size: 19px;
+        font-size: 20px;
     }
 
     .photo-container {
         gap: 8px;
+        transform: scale(0.88);
     }
 
     .photo-card {
-        width: 29vw;
-        max-width: 180px;
-        padding: 6px 6px 12px;
+        width: 30vw;
+        max-width: 190px;
     }
 
     .photo-card img {
-        height: 28vw;
-        max-height: 180px;
+        height: 190px;
     }
 
-    .photo-caption {
-        font-size: 15px;
+    .letter-paper {
+        min-height: 390px;
+        padding: 38px 25px;
     }
 
-    .letter {
-        min-height: 500px;
-        padding: 30px 25px;
+    .letter-paper h1 {
+        font-size: 32px;
     }
 
-    .letter-text {
-        font-size: 19px;
+    .letter-paper p {
+        font-size: 21px;
     }
 
-    .letter-to {
-        font-size: 27px;
-    }
-
-    .letter-sign {
-        font-size: 24px;
+    .final-title {
+        font-size: 37px;
     }
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<div class="app">
+
+<div class="app" id="app">
 
 
 <!-- =====================================================
-     MOVING SPARKLES
+     BACKGROUND HEARTS
+===================================================== -->
+
+<div class="bg-heart h1">♥</div>
+<div class="bg-heart h2">♥</div>
+<div class="bg-heart h3">♥</div>
+<div class="bg-heart h4">♥</div>
+<div class="bg-heart h5">♥</div>
+<div class="bg-heart h6">♥</div>
+<div class="bg-heart h7">♥</div>
+
+
+<!-- =====================================================
+     SPARKLES
 ===================================================== -->
 
 <div class="sparkle"
-     style="top:8%;left:15%;--moveX:35px;--moveY:25px;--duration:4s;--delay:0s;"></div>
+     style="left:12%;top:20%;--moveX:20px;--moveY:-30px;--duration:4s;--delay:0s;"></div>
 
 <div class="sparkle"
-     style="top:14%;left:47%;--moveX:-25px;--moveY:35px;--duration:5s;--delay:1s;"></div>
+     style="left:25%;top:65%;--moveX:-25px;--moveY:-20px;--duration:5s;--delay:1s;"></div>
 
 <div class="sparkle"
-     style="top:20%;left:78%;--moveX:30px;--moveY:-25px;--duration:4.5s;--delay:0.5s;"></div>
+     style="left:75%;top:25%;--moveX:25px;--moveY:25px;--duration:4.5s;--delay:0.5s;"></div>
 
 <div class="sparkle"
-     style="top:34%;left:10%;--moveX:-20px;--moveY:30px;--duration:5.5s;--delay:1.2s;"></div>
+     style="left:88%;top:58%;--moveX:-20px;--moveY:30px;--duration:5.5s;--delay:1.5s;"></div>
 
 <div class="sparkle"
-     style="top:40%;left:89%;--moveX:25px;--moveY:20px;--duration:4s;--delay:2s;"></div>
+     style="left:50%;top:75%;--moveX:30px;--moveY:-25px;--duration:4s;--delay:2s;"></div>
 
-<div class="sparkle"
-     style="top:53%;left:22%;--moveX:35px;--moveY:-30px;--duration:5s;--delay:0.7s;"></div>
 
-<div class="sparkle"
-     style="top:61%;left:73%;--moveX:-35px;--moveY:25px;--duration:4.5s;--delay:1.5s;"></div>
+<!-- =====================================================
+     PINK FLASH
+===================================================== -->
 
-<div class="sparkle"
-     style="top:75%;left:12%;--moveX:25px;--moveY:-20px;--duration:5.5s;--delay:2.2s;"></div>
-
-<div class="sparkle"
-     style="top:82%;left:48%;--moveX:-30px;--moveY:-30px;--duration:4.2s;--delay:0.8s;"></div>
-
-<div class="sparkle"
-     style="top:88%;left:82%;--moveX:30px;--moveY:-25px;--duration:5s;--delay:1.8s;"></div>
-
-<div class="sparkle"
-     style="top:27%;left:58%;--moveX:20px;--moveY:30px;--duration:4.8s;--delay:2.4s;"></div>
-
-<div class="sparkle"
-     style="top:68%;left:92%;--moveX:-25px;--moveY:-30px;--duration:5.2s;--delay:0.4s;"></div>
+<div class="pink-flash" id="pinkFlash"></div>
 
 
 <!-- =====================================================
      PAGE 1
 ===================================================== -->
 
-<section class="page active first-heart-page"
-         id="page1">
+<section class="page active" id="page1">
 
     <div class="small-title">
-        First things first
+        A little surprise for you
+    </div>
+
+    <div class="big-title">
+        Something special<br>
+        is waiting...
+    </div>
+
+    <div class="sub-title">
+        Touch the heart
     </div>
 
     <div class="first-heart-area">
 
-        <div class="start-heart"
-             id="startHeart">
+        <div
+            class="start-heart"
+            id="startHeart"
+            onclick="startSurprise()">
         </div>
 
-        <div class="arrow"
-             id="startArrow"
-             onclick="startSurprise()">
-        </div>
-
-    </div>
-
-    <div class="sub-title">
-        Something special is waiting...
     </div>
 
 </section>
@@ -2166,11 +2179,13 @@ body {
      PAGE 2 - CAKE
 ===================================================== -->
 
-<section class="page cake-page"
-         id="page2">
+<section class="page cake-page" id="page2">
 
-    <div class="cake-area"
-         id="cakeArea">
+    <div class="small-title">
+        And here comes your birthday cake...
+    </div>
+
+    <div class="cake-area" id="cakeArea">
 
         <div class="plate"></div>
 
@@ -2190,16 +2205,20 @@ body {
 
         <div class="flame"></div>
 
-        <div class="cake-message"
-             id="cakeMessage">
-            Happy Birthday Ricky!
-        </div>
-
     </div>
 
-    <button class="next-btn"
-            onclick="goToPage(3)">
-        Next
+    <!-- HAPPY BIRTHDAY IS BELOW THE CAKE -->
+
+    <div class="cake-message" id="cakeMessage">
+        Happy Birthday Ricky
+    </div>
+
+    <button
+        class="next-btn"
+        id="cakeNext"
+        style="display:none;"
+        onclick="showPage(3)">
+        Continue
     </button>
 
 </section>
@@ -2209,8 +2228,7 @@ body {
      PAGE 3 - BALLOONS
 ===================================================== -->
 
-<section class="page balloon-page"
-         id="page3">
+<section class="page balloon-page" id="page3">
 
     <div class="balloon-title">
         Pop the balloons
@@ -2218,31 +2236,40 @@ body {
 
     <div class="balloon-area">
 
-        <div class="balloon b1"
-             onclick="popBalloon(this, 1)">
+        <div
+            class="balloon b1"
+            onclick="popBalloon(this, 1)">
         </div>
 
-        <div class="balloon b2"
-             onclick="popBalloon(this, 2)">
+        <div
+            class="balloon b2"
+            onclick="popBalloon(this, 2)">
         </div>
 
-        <div class="balloon b3"
-             onclick="popBalloon(this, 3)">
+        <div
+            class="balloon b3"
+            onclick="popBalloon(this, 3)">
         </div>
 
-        <div class="balloon b4"
-             onclick="popBalloon(this, 4)">
+        <div
+            class="balloon b4"
+            onclick="popBalloon(this, 4)">
         </div>
 
-        <div class="balloon-message"
-             id="balloonMessage">
+
+        <div
+            class="balloon-message"
+            id="balloonMessage">
         </div>
 
     </div>
 
-    <button class="next-btn"
-            onclick="goToPage(4)">
-        Next
+    <button
+        class="next-btn"
+        id="balloonNext"
+        style="display:none;"
+        onclick="showPage(4)">
+        Continue
     </button>
 
 </section>
@@ -2252,18 +2279,20 @@ body {
      PAGE 4 - PHOTOS
 ===================================================== -->
 
-<section class="page"
-         id="page4">
+<section class="page" id="page4">
 
     <div class="memory-title">
-        A walk down memory lane
+        A little collection of you
     </div>
 
     <div class="photo-container">
 
+
         <div class="photo-card">
 
-            <img src="data:image/jpeg;base64,__PHOTO1__">
+            <img
+                src="data:image/jpeg;base64,__PHOTO1__"
+                alt="Photo 1">
 
             <div class="photo-caption">
                 One of my favourite pictures of you
@@ -2274,7 +2303,9 @@ body {
 
         <div class="photo-card">
 
-            <img src="data:image/jpeg;base64,__PHOTO2__">
+            <img
+                src="data:image/jpeg;base64,__PHOTO2__"
+                alt="Photo 2">
 
             <div class="photo-caption">
                 A moment I really love
@@ -2285,7 +2316,9 @@ body {
 
         <div class="photo-card">
 
-            <img src="data:image/jpeg;base64,__PHOTO3__">
+            <img
+                src="data:image/jpeg;base64,__PHOTO3__"
+                alt="Photo 3">
 
             <div class="photo-caption">
                 A picture that always makes me smile
@@ -2293,11 +2326,14 @@ body {
 
         </div>
 
+
     </div>
 
-    <button class="next-btn"
-            onclick="goToPage(5)">
-        Next
+
+    <button
+        class="next-btn"
+        onclick="showPage(5)">
+        Continue
     </button>
 
 </section>
@@ -2307,114 +2343,93 @@ body {
      PAGE 5 - ENVELOPE
 ===================================================== -->
 
-<section class="page envelope-page"
-         id="page5">
+<section class="page envelope-page" id="page5">
 
-    <div class="envelope-area"
-         id="envelopeArea"
-         onclick="openEnvelope()">
+    <div class="small-title">
+        There is one more thing...
+    </div>
 
-        <div class="envelope"></div>
+    <div
+        class="envelope-wrapper"
+        onclick="openLetter()">
 
-        <div class="envelope-flap"></div>
+        <div class="envelope">
 
-        <div class="seal"></div>
-
-        <div class="envelope-hint">
-            A little something for you...
-        </div>
-
-
-        <!-- FULL LETTER -->
-
-        <div class="letter">
-
-            <div class="letter-to">
-                To my Ricky,
+            <div class="envelope-letter-preview">
+                For you...
             </div>
 
-            <div class="letter-text">
-
-                Today is your special day, and I just wanted
-                to leave a few words for you.
-
-                <br><br>
-
-                You are someone who has become very special
-                to me. The little moments, the conversations,
-                the smiles and even the simplest memories
-                with you mean more to me than you may know.
-
-                <br><br>
-
-                I hope this new year of your life brings you
-                lots of happiness, peace, success and beautiful
-                moments.
-
-                <br><br>
-
-                No matter where life takes us, I hope you
-                always remember that there is someone who
-                genuinely wishes the very best for you.
-
-                <br><br>
-
-                Keep smiling, keep being yourself, and have
-                the most beautiful birthday.
-
-            </div>
-
-            <div class="letter-sign">
-                With lots of love,<br>
-                From your Maggi
-            </div>
+            <div class="envelope-right"></div>
 
         </div>
 
     </div>
 
+</section>
 
-    <button class="next-btn"
-            id="letterNext"
-            onclick="goToPage(6)"
-            style="display:none;">
-        Next
+
+<!-- =====================================================
+     FULL LETTER
+===================================================== -->
+
+<div
+    class="letter-full"
+    id="letterFull">
+
+    <div class="letter-paper">
+
+        <h1>
+            Happy Birthday my dear Rickyluu❤️
+        </h1>
+
+        <p>
+            Today is your special day, so I just wanted
+            to make a little something for you.
+        </p>
+
+        <p>
+            I hope this birthday brings you lots of
+            happiness, beautiful moments and reasons
+            to smile.
+        </p>
+
+        <p>
+            Keep smiling and keep being the wonderful
+            person you are.
+        </p>
+
+        <div class="letter-from">
+            From your Maggi
+        </div>
+
+    </div>
+
+    <button
+        class="close-letter"
+        onclick="closeLetter()">
+        Continue
     </button>
 
-</section>
+</div>
 
 
 <!-- =====================================================
      PAGE 6 - FINAL
 ===================================================== -->
 
-<section class="page final-page"
-         id="page6">
+<section class="page final-page" id="page6">
 
-    <div class="final-heart"></div>
+    <div class="final-heart">
 
-    <div class="final-title">
-        HAPPY BIRTHDAY
+        <div class="final-heart-shape"></div>
+
     </div>
 
-    <div class="final-name">
-        Ricky!
+    <div class="final-title">
+        Happy Birthday Ricky 😽🌷💗
     </div>
 
 </section>
-
-
-<!-- =====================================================
-     EFFECT LAYERS
-===================================================== -->
-
-<div class="pink-flash"
-     id="pinkFlash">
-</div>
-
-<div class="confetti-box"
-     id="confettiBox">
-</div>
 
 
 </div>
@@ -2423,69 +2438,56 @@ body {
 <script>
 
 /* =========================================================
-   PAGE NAVIGATION
+   PAGE CONTROL
 ========================================================= */
 
-function goToPage(pageNumber) {
+let currentPage = 1;
 
-    const pages =
-        document.querySelectorAll(".page");
 
-    pages.forEach(function(page) {
-        page.classList.remove("active");
-    });
+function showPage(number) {
 
-    const selected =
-        document.getElementById(
-            "page" + pageNumber
-        );
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
 
-    if (selected) {
-        selected.classList.add("active");
+            page.classList.remove("active");
+
+        });
+
+
+    const nextPage =
+        document.getElementById("page" + number);
+
+
+    if (nextPage) {
+
+        nextPage.classList.add("active");
+
+        currentPage = number;
+
     }
 
 
-    /* cake starts building */
+    if (number === 2) {
 
-    if (pageNumber === 2) {
+        startCake();
 
-        const cake =
-            document.getElementById("cakeArea");
-
-        cake.classList.remove("build");
-
-        void cake.offsetWidth;
-
-        cake.classList.add("build");
-
-        const message =
-            document.getElementById("cakeMessage");
-
-        message.classList.remove("show");
-
-        void message.offsetWidth;
-
-        message.classList.add("show");
     }
 
 
-    /* final confetti */
+    if (number === 6) {
 
-    if (pageNumber === 6) {
+        createPaperPieces();
 
-        createConfetti();
     }
 }
 
 
 /* =========================================================
-   START HEART
+   PAGE 1 - HEART
 ========================================================= */
 
 function startSurprise() {
-
-    const arrow =
-        document.getElementById("startArrow");
 
     const heart =
         document.getElementById("startHeart");
@@ -2494,83 +2496,99 @@ function startSurprise() {
         document.getElementById("pinkFlash");
 
 
-    /* arrow moves towards heart */
+    heart.classList.add("blast-heart");
 
-    arrow.classList.add("shoot");
-
-
-    /* wait until arrow reaches heart */
+    createHeartParticles();
 
     setTimeout(function() {
-
-        heart.classList.add("blast");
 
         flash.classList.add("show");
 
-        createPinkParticles();
+    }, 180);
 
-    }, 650);
-
-
-    /* move to cake */
 
     setTimeout(function() {
 
-        goToPage(2);
+        showPage(2);
 
-    }, 1250);
+    }, 720);
+
+
+    setTimeout(function() {
+
+        flash.classList.remove("show");
+
+    }, 1500);
 }
 
 
 /* =========================================================
-   PINK PARTICLES
+   HEART PARTICLES
 ========================================================= */
 
-function createPinkParticles() {
+function createHeartParticles() {
 
-    for (
-        let i = 0;
-        i < 30;
-        i++
-    ) {
+    const colors = [
+        "#f7a5c9",
+        "#ffd0e4",
+        "#e984b5",
+        "#ffffff"
+    ];
 
-        const particle =
+
+    for (let i = 0; i < 26; i++) {
+
+        const piece =
             document.createElement("div");
 
-        particle.className =
-            "particle";
+
+        piece.className = "particle";
+
 
         const angle =
-            Math.random() *
-            Math.PI * 2;
+            Math.random() * Math.PI * 2;
+
 
         const distance =
-            120 +
-            Math.random() * 330;
+            80 + Math.random() * 180;
 
-        particle.style.left =
-            "50%";
 
-        particle.style.top =
-            "45%";
+        piece.style.left = "50%";
+        piece.style.top = "50%";
 
-        particle.style.setProperty(
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        piece.style.borderRadius =
+            Math.random() > 0.5
+                ? "50%"
+                : "2px";
+
+
+        piece.style.setProperty(
             "--x",
             Math.cos(angle) * distance + "px"
         );
 
-        particle.style.setProperty(
+
+        piece.style.setProperty(
             "--y",
             Math.sin(angle) * distance + "px"
         );
 
-        document.body.appendChild(
-            particle
-        );
+
+        document.body.appendChild(piece);
+
 
         setTimeout(function() {
 
-            particle.remove();
+            piece.remove();
 
         }, 1300);
     }
@@ -2578,193 +2596,318 @@ function createPinkParticles() {
 
 
 /* =========================================================
-   BALLOON MESSAGES
+   CAKE
+========================================================= */
+
+function startCake() {
+
+    const cake =
+        document.getElementById("cakeArea");
+
+    const message =
+        document.getElementById("cakeMessage");
+
+    const next =
+        document.getElementById("cakeNext");
+
+
+    cake.classList.remove("build");
+
+    message.classList.remove("show");
+
+    next.style.display = "none";
+
+
+    void cake.offsetWidth;
+
+
+    cake.classList.add("build");
+
+
+    message.classList.add("show");
+
+
+    setTimeout(function() {
+
+        next.style.display = "inline-block";
+
+    }, 5200);
+}
+
+
+/* =========================================================
+   BALLOONS
 ========================================================= */
 
 const balloonMessages = {
 
     1:
-        "You make ordinary moments feel special.",
+        "You deserve all the happiness in the world.",
 
     2:
-        "Your smile can make even a simple day brighter.",
+        "May this birthday bring you many beautiful memories.",
 
     3:
-        "I hope you always have reasons to smile.",
+        "Keep smiling because your smile makes everything brighter.",
 
     4:
-        "You are truly someone very special to me."
+        "Wishing you a year full of happiness and wonderful moments."
 };
 
 
-/* =========================================================
-   POP BALLOON
-========================================================= */
+let poppedCount = 0;
+
 
 function popBalloon(balloon, number) {
 
-    if (
-        balloon.classList.contains("popped")
-    ) {
+    if (balloon.classList.contains("popped")) {
+
         return;
+
     }
+
 
     balloon.classList.add("popped");
 
 
+    poppedCount++;
+
+
     const message =
-        document.getElementById(
-            "balloonMessage"
-        );
+        document.getElementById("balloonMessage");
+
 
     message.innerText =
         balloonMessages[number];
 
+
     message.classList.remove("show");
 
-    void message.offsetWidth;
-
-    message.classList.add("show");
-
-
-    /* tiny pop particles */
-
-    for (
-        let i = 0;
-        i < 10;
-        i++
-    ) {
-
-        const particle =
-            document.createElement("div");
-
-        particle.className =
-            "particle";
-
-        const rect =
-            balloon.getBoundingClientRect();
-
-        particle.style.left =
-            rect.left +
-            rect.width / 2 +
-            "px";
-
-        particle.style.top =
-            rect.top +
-            rect.height / 2 +
-            "px";
-
-        const angle =
-            Math.random() *
-            Math.PI * 2;
-
-        const distance =
-            40 +
-            Math.random() * 80;
-
-        particle.style.setProperty(
-            "--x",
-            Math.cos(angle) * distance + "px"
-        );
-
-        particle.style.setProperty(
-            "--y",
-            Math.sin(angle) * distance + "px"
-        );
-
-        document.body.appendChild(
-            particle
-        );
-
-        setTimeout(function() {
-
-            particle.remove();
-
-        }, 1200);
-    }
-}
-
-
-/* =========================================================
-   ENVELOPE OPEN
-========================================================= */
-
-function openEnvelope() {
-
-    const envelope =
-        document.getElementById(
-            "envelopeArea"
-        );
-
-    if (
-        envelope.classList.contains("open")
-    ) {
-        return;
-    }
-
-    envelope.classList.add("open");
-
-
-    /* show next after letter opens */
 
     setTimeout(function() {
 
-        const next =
-            document.getElementById(
-                "letterNext"
-            );
+        message.classList.add("show");
 
-        next.style.display =
-            "inline-block";
+    }, 80);
 
-    }, 1000);
+
+    createBalloonPieces(balloon);
+
+
+    if (poppedCount >= 4) {
+
+        setTimeout(function() {
+
+            document
+                .getElementById("balloonNext")
+                .style.display = "inline-block";
+
+        }, 500);
+    }
 }
 
 
 /* =========================================================
-   FINAL CONFETTI
+   BALLOON POP PARTICLES
 ========================================================= */
 
-function createConfetti() {
+function createBalloonPieces(balloon) {
 
-    const box =
-        document.getElementById(
-            "confettiBox"
-        );
-
-    box.innerHTML = "";
+    const rect =
+        balloon.getBoundingClientRect();
 
 
-    for (
-        let i = 0;
-        i < 65;
-        i++
-    ) {
+    const colors = [
+        "#f5a5c8",
+        "#e4b2dc",
+        "#b4cbe2",
+        "#f6c1da"
+    ];
+
+
+    for (let i = 0; i < 10; i++) {
 
         const piece =
             document.createElement("div");
 
-        piece.className =
-            "confetti";
+
+        piece.className = "particle";
+
 
         piece.style.left =
-            Math.random() * 100 + "%";
+            rect.left + rect.width / 2 + "px";
 
-        piece.style.animationDelay =
-            Math.random() * 1.5 + "s";
 
-        piece.style.transform =
-            "rotate(" +
-            Math.random() * 360 +
-            "deg)";
+        piece.style.top =
+            rect.top + rect.height / 2 + "px";
 
-        box.appendChild(piece);
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+
+        const distance =
+            30 + Math.random() * 70;
+
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        piece.style.setProperty(
+            "--x",
+            Math.cos(angle) * distance + "px"
+        );
+
+
+        piece.style.setProperty(
+            "--y",
+            Math.sin(angle) * distance + "px"
+        );
+
+
+        document.body.appendChild(piece);
+
+
+        setTimeout(function() {
+
+            piece.remove();
+
+        }, 1300);
+    }
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+function openLetter() {
+
+    const letter =
+        document.getElementById("letterFull");
+
+
+    letter.classList.add("open");
+}
+
+
+function closeLetter() {
+
+    const letter =
+        document.getElementById("letterFull");
+
+
+    letter.classList.remove("open");
+
+
+    setTimeout(function() {
+
+        showPage(6);
+
+    }, 300);
+}
+
+
+/* =========================================================
+   FINAL COLOUR PAPER PIECES
+========================================================= */
+
+function createPaperPieces() {
+
+    const colors = [
+        "#f5a3c7",
+        "#f6d18d",
+        "#a8c7df",
+        "#d9a7d2",
+        "#ffffff",
+        "#e99ab9",
+        "#c5dcae"
+    ];
+
+
+    for (let i = 0; i < 45; i++) {
+
+        const piece =
+            document.createElement("div");
+
+
+        piece.className = "paper-piece";
+
+
+        const side =
+            Math.random() > 0.5
+                ? 1
+                : -1;
+
+
+        const x =
+            side *
+            (120 + Math.random() * 500);
+
+
+        const y =
+            -80 +
+            Math.random() * 700;
+
+
+        const rotate =
+            Math.random() * 720 - 360;
+
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        piece.style.setProperty(
+            "--x",
+            x + "px"
+        );
+
+
+        piece.style.setProperty(
+            "--y",
+            y + "px"
+        );
+
+
+        piece.style.setProperty(
+            "--rotate",
+            rotate + "deg"
+        );
+
+
+        piece.style.left =
+            "50%";
+
+
+        piece.style.top =
+            "50%";
+
+
+        document.body.appendChild(piece);
+
+
+        setTimeout(function() {
+
+            piece.remove();
+
+        }, 2200);
     }
 }
 
 </script>
 
 </body>
+
 </html>
 """
 
@@ -2790,7 +2933,7 @@ html = html.replace(
 
 
 # =========================================================
-# SHOW APP
+# RUN APP
 # =========================================================
 
 components.html(
